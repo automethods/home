@@ -1,0 +1,60 @@
+{
+  "sports-car": {
+    "source": "911.blend",
+    "meshes": 32,
+    "triangles": 143806,
+    "bytes": 4270408
+  },
+  "fleet-car": {
+    "source": "Vehicle Pack/Car 10/Car 10.obj",
+    "meshes": 1,
+    "triangles": 7611,
+    "bytes": 451168
+  },
+  "bus": {
+    "source": "Vehicle Pack/Bus 2/Bus 2.obj",
+    "meshes": 1,
+    "triangles": 1950,
+    "bytes": 196980
+  },
+  "chassis": {
+    "source": "Trucks/truck_chassis.glb",
+    "meshes": 36,
+    "triangles": 127012,
+    "bytes": 4362688
+  },
+  "sports-car-rich": {
+    "source": "911.blend",
+    "meshes": 45,
+    "triangles": 370554,
+    "bytes": 14319984,
+    "textures": 11,
+    "materials": 18
+  },
+  "fleet-truck": {
+    "source": "Vehicle Pack/Truck 2/Truck 2.obj",
+    "meshes": 1,
+    "triangles": 8338,
+    "bytes": 595824
+  },
+  "gearbox": {
+    "source": "scripts/prepare-expansion-models.py (authored)",
+    "meshes": 24,
+    "triangles": 15160,
+    "bytes": 709256,
+    "purpose": "Homepage visual illustration"
+  },
+  "commercial-fleet": {
+    "source": "bus.glb / Vehicle Pack/Bus 2 (three derived liveries)",
+    "meshes": 3,
+    "triangles": 5850,
+    "bytes": 2290864,
+    "purpose": "Homepage visual illustration",
+    "vehicles": 3,
+    "liveries": [
+      "silver",
+      "blue",
+      "teal"
+    ]
+  }
+}

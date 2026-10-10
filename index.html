@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08131c">
+  <title data-i18n="pageTitle">АвтоМетод — інтерактивні інженерні розрахунки</title>
+  <meta name="description" data-i18n-content="pageDescription" content="Методичні матеріали для інженерного навчання: пояснення, формули, інтерактивні розрахунки, порівняння варіантів і звіти в браузері.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=0.5.0">
+  <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="card-models.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}</script>
+  <script type="module" src="i18n.js"></script>
+  <script type="module" src="card-models.js"></script>
+  <script type="module" src="site.js"></script>
+  <script type="module" src="credits.js"></script>
+  <link rel="canonical" href="https://automethods.com/">
+</head>
+<body>
+  <a class="skip-link" href="#catalogue" data-i18n="skip">До навчальних матеріалів</a>
+  <header>
+    <div class="brand-block">
+    <a class="brand" href="#top" aria-label="Головна сторінка АвтоМетод" data-i18n-aria-label="home">
+      <img src="assets/favicon.svg?v=0.5.0" alt="" width="34" height="34"><span data-i18n="brand">АвтоМетод</span>
+    </a>
+    <span class="header-version" title="Версія головної сторінки" data-i18n-title="homepageVersion">v0.5.0</span>
+    </div>
+    <div class="header-tools">
+    <div class="account-controls" role="group" aria-label="Обліковий запис" data-i18n-aria-label="account">
+      <span id="account-user" class="account-user" hidden></span>
+      <button type="button" class="account-button" data-account-action="signin" data-i18n="signIn">Увійти</button>
+      <button type="button" class="account-button account-signup" data-account-action="signup" data-i18n="signUp">Реєстрація</button>
+      <button type="button" class="account-button" id="account-signout" data-i18n="signOut" hidden>Вийти</button>
+    </div>
+    <div class="language-switch" role="group" aria-label="Мова" data-i18n-aria-label="language">
+      <button type="button" data-language="en" aria-pressed="false">EN</button>
+      <button type="button" data-language="uk" aria-pressed="true">Українська</button>
+    </div>
+    </div>
+  </header>
+  <p id="account-feedback" class="account-feedback" role="status" hidden></p>
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-heading">
+      <img class="hero-image" src="vehicle.webp" alt="Автомобіль у темній студії, вигляд спереду зліва" data-i18n-alt="heroImage" fetchpriority="high" width="1954" height="805">
+      <div class="wrap hero-copy">
+        <p class="eyebrow" data-i18n="eyebrow">Інтерактивні методичні матеріали</p>
+        <h1 id="hero-heading" data-i18n="headline">Зрозуміти.
+Розрахувати.
+Перевірити.</h1>
+        <p class="intro" data-i18n="intro">Від вихідних даних до інженерного рішення. Пояснення, формули, розрахунки та графіки — в одному середовищі.</p>
+        <p class="hero-note" data-i18n="heroNote">Для курсового проєктування та самостійного дослідження.</p>
+      </div>
+    </section>
+    <div class="wrap">
+      <section id="catalogue" aria-labelledby="catalogue-heading">
+        <div class="section-heading">
+          <div><p class="eyebrow" data-i18n="catalogueLabel">Навчальні проєкти</p><h2 id="catalogue-heading" data-i18n="choose">Оберіть предмет для дослідження</h2></div>
+        </div>
+        <div class="category-key" aria-label="Напрями" data-i18n-aria-label="categories">
+          <span class="category" data-category="automotive" data-i18n="categoryAutomotive">Автомобільний транспорт</span>
+          <span class="category" data-category="mechanics" data-i18n="categoryMechanics">Загальна механіка</span>
+        </div>
+        <div class="cards">
+          <article class="card" id="vehicle" data-category="automotive">
+            <div class="card-top"><span class="number">01</span><span class="project-version" data-i18n-title="publishedVersion" title="Опублікована версія" data-project-version="vehicle">v0.5.02</span><span class="availability" data-i18n="available">Навчальна версія</span></div>
+            <div class="card-model" data-scene="vehicle" tabindex="0" role="region" aria-label="Інтерактивна модель спортивного автомобіля" data-i18n-aria-label="modelVehicle" aria-describedby="hint-vehicle" title="Стрілки обертають, + та − змінюють масштаб. На сенсорному екрані використовуйте два пальці." data-i18n-title="keyboardHint" aria-busy="true">
+              <span class="model-status" role="status" data-i18n="loadingVehicle">Завантаження спортивного автомобіля…</span>
+              <span class="model-hint" id="hint-vehicle" data-i18n="hint">Перетягуйте для обертання · Прокручуйте для масштабування</span>
+            </div>
+            <span class="card-category" data-i18n="categoryAutomotive">Автомобільний транспорт</span>
+            <h3 data-i18n="subjectVehicle">Автомобілі (теорія експлуатаційних властивостей та розрахунку)</h3>
+            <p data-i18n="vehicleIntro">Досліджуйте опір руху, тягу, розгін та енергетичні витрати. Порівнюйте автомобілі з ДВЗ, електричним і гібридним приводом.</p>
+            <details class="project-detail"><summary data-i18n="scope">Що охоплює проєкт</summary><p data-i18n="vehicleDetail">Задавайте клас автомобіля, масу, навантаження й дорожні умови; розраховуйте потрібну потужність, трансмісію та окремі вузли. Перевіряйте вплив параметрів на розгін і витрати енергії за WLTC або власним профілем швидкості. Формуйте звіт із формулами, підстановками та графіками.</p></details>
+            <a class="action" href="https://hybridtrustmail.github.io/Automobile/"><span data-i18n="explore">Перейти до проєкту</span><span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="card" id="powertrain" data-category="automotive">
+            <div class="card-top"><span class="number">02</span><span class="project-version" data-i18n-title="publishedVersion" title="Опублікована версія" data-project-version="powertrain">v0.8.4</span><span class="availability" data-i18n="available">Навчальна версія</span></div>
+            <div class="card-model" data-scene="powertrain" tabindex="0" role="region" aria-label="Інтерактивна модель шасі вантажівки" data-i18n-aria-label="modelPowertrain" aria-describedby="hint-powertrain" title="Стрілки обертають, + та − змінюють масштаб. На сенсорному екрані використовуйте два пальці." data-i18n-title="keyboardHint" aria-busy="true">
+              <span class="model-status" role="status" data-i18n="loadingPowertrain">Завантаження шасі вантажівки…</span>
+              <span class="model-hint" id="hint-powertrain" data-i18n="hint">Перетягуйте для обертання · Прокручуйте для масштабування</span>
+            </div>
+            <span class="card-category" data-i18n="categoryAutomotive">Автомобільний транспорт</span>
+            <h3 data-i18n="subjectPowertrain">Енергетичні силові установки автомобілів</h3>
+            <p data-i18n="powertrainIntro">Розраховуйте робочий цикл ДВЗ. Досліджуйте електричний та гібридний приводи, енергетичні втрати й рекуперацію.</p>
+            <details class="project-detail"><summary data-i18n="scope">Що охоплює проєкт</summary><p data-i18n="powertrainDetail">Тепловий і динамічний розрахунок ДВЗ, індикаторні, швидкісні та паливні характеристики. Для електричного приводу — характеристики двигуна, обмеження інвертора й батареї. Для гібридів — окремий облік палива, енергії батареї та зміни її заряду. Порівнюйте варіанти й експортуйте результати.</p></details>
+            <a class="action" href="https://hybridtrustmail.github.io/ICE/"><span data-i18n="explore">Перейти до проєкту</span><span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="card" id="maintenance" data-category="automotive">
+            <div class="card-top"><span class="number">03</span><span class="project-version" data-i18n-title="publishedVersion" title="Опублікована версія" data-project-version="maintenance">v0.5.0</span><span class="availability" data-i18n="available">Навчальна версія</span></div>
+            <div class="card-model" data-scene="maintenance" tabindex="0" role="region" aria-label="Інтерактивна модель автопарку" data-i18n-aria-label="modelMaintenance" aria-describedby="hint-maintenance" title="Стрілки обертають, + та − змінюють масштаб. На сенсорному екрані використовуйте два пальці." data-i18n-title="keyboardHint" aria-busy="true">
+              <span class="model-status" role="status" data-i18n="loadingMaintenance">Завантаження автопарку…</span>
+              <span class="model-hint" id="hint-maintenance" data-i18n="hint">Перетягуйте для обертання · Прокручуйте для масштабування</span>
+            </div>
+            <span class="card-category" data-i18n="categoryAutomotive">Автомобільний транспорт</span>
+            <h3 data-i18n="subjectMaintenance">Технічна експлуатація автомобілів</h3>
+            <p data-i18n="maintenanceIntro">Плануйте завантаження СТО та робочих постів. Пов’язуйте організацію обслуговування з діагностичними операціями.</p>
+            <details class="project-detail"><summary data-i18n="scope">Що охоплює проєкт</summary><p data-i18n="maintenanceDetail">Навчальний проєкт багатомарочної СТО: обсяг робіт, розклад постів і узгодження операцій. Опрацьовуйте вправи з ABS, похибок вимірювання, геометрії коліс та ADAS. Зіставляйте вихідні припущення з результатами планування.</p></details>
+            <a class="action" href="https://hybridtrustmail.github.io/TEA/"><span data-i18n="explore">Перейти до проєкту</span><span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="future-card" data-category="mechanics">
+            <div class="card-top"><span class="number">04</span><span class="availability planned" data-i18n="planned">Готується</span></div>
+            <div class="card-model" data-scene="gearbox" tabindex="0" role="region" data-i18n-aria-label="modelGearbox" aria-describedby="hint-gearbox" data-i18n-title="keyboardHint" aria-busy="true" aria-label="Інтерактивна модель редуктора" title="Стрілки обертають, + та − змінюють масштаб. На сенсорному екрані використовуйте два пальці.">
+              <span class="model-status" role="status" data-i18n="loadingGearbox">Завантаження редуктора…</span>
+              <span class="model-hint" id="hint-gearbox" data-i18n="hint">Перетягуйте для обертання · Прокручуйте для масштабування</span>
+            </div>
+            <span class="card-category" data-i18n="categoryMechanics">Загальна механіка</span>
+            <h3 data-i18n="subjectGearbox">Зубчасті передачі та редуктори</h3>
+            <p data-i18n="gearboxIntro">Майбутні методичні матеріали з кінематики, передатних чисел та розрахунку механічних передач.</p>
+            <span class="future-note" data-i18n="futureNote">Матеріали ще не опубліковано</span>
+          </article>
+          <article class="future-card" data-category="automotive">
+            <div class="card-top"><span class="number">05</span><span class="project-version"><span data-i18n="foundationVersion">Основа</span> v0.1.0</span><span class="availability planned" data-i18n="planned">Готується</span></div>
+            <div class="card-model" data-scene="commercial" tabindex="0" role="region" data-i18n-aria-label="modelCommercial" aria-describedby="hint-commercial" data-i18n-title="keyboardHint" aria-busy="true" aria-label="Інтерактивна модель автопарку маршрутних автобусів" title="Стрілки обертають, + та − змінюють масштаб. На сенсорному екрані використовуйте два пальці.">
+              <span class="model-status" role="status" data-i18n="loadingCommercial">Завантаження автопарку…</span>
+              <span class="model-hint" id="hint-commercial" data-i18n="hint">Перетягуйте для обертання · Прокручуйте для масштабування</span>
+            </div>
+            <span class="card-category" data-i18n="categoryAutomotive">Автомобільний транспорт</span>
+            <h3 data-i18n="subjectCea">Комерційна експлуатація автомобілів</h3>
+            <p data-i18n="ceaIntro">Майбутній проєкт: маршрути, розклад, автопарк, енергоспоживання та експлуатаційні витрати.</p>
+            <span class="future-note" data-i18n="futureNote">Матеріали ще не опубліковано</span>
+          </article>
+        </div>
+      </section>
+      <section class="method" aria-labelledby="method-heading">
+        <div class="section-heading">
+          <div><p class="eyebrow" data-i18n="methodLabel">Підхід до навчання</p><h2 id="method-heading" data-i18n="methodHeading">Результат, який ви можете обґрунтувати</h2></div>
+          <p data-i18n="methodIntro">Автоматизуйте повторювані обчислення, щоб зосередитися на припущеннях, обмеженнях і виборі рішення.</p>
+        </div>
+        <ol class="method-steps">
+          <li><span class="step-number">01</span><h3 data-i18n="stepInput">Вихідні дані</h3><p data-i18n="stepInputText">Визначте призначення, умови та базовий варіант.</p></li>
+          <li><span class="step-number">02</span><h3 data-i18n="stepCalculate">Розрахунок</h3><p data-i18n="stepCalculateText">Простежте формули, одиниці й взаємозв’язки параметрів.</p></li>
+          <li><span class="step-number">03</span><h3 data-i18n="stepCompare">Порівняння</h3><p data-i18n="stepCompareText">Змінюйте параметри та оцінюйте вплив на результат.</p></li>
+          <li><span class="step-number">04</span><h3 data-i18n="stepExplain">Обґрунтування</h3><p data-i18n="stepExplainText">Поясніть компроміси та оформіть розрахунковий звіт.</p></li>
+        </ol>
+      </section>
+      <section class="organisations" aria-labelledby="organisations-heading">
+        <div class="section-heading">
+          <div><p class="eyebrow" data-i18n="organisationsLabel">Освітнє середовище</p><h2 id="organisations-heading" data-i18n="organisationsHeading">Заклади та структурні підрозділи</h2></div>
+        </div>
+        <div id="shared-organisations">
+<!-- shared-credits:organisations -->
+<details class="organisation-group" id="zhatfk"><summary class="organisation-tile organisation-summary"><span class="organisation-mark"><img src="assets/organisations/college.svg" alt="" width="44" height="44" loading="lazy"></span><span class="organisation-copy"><small>Заклад освіти</small><strong>Житомирський агротехнічний фаховий коледж</strong></span><span class="disclosure-chevron" aria-hidden="true">⌄</span></summary><a class="institution-site" href="https://zhatk.zt.ua/" target="_blank" rel="noopener noreferrer">Офіційний сайт закладу <span aria-hidden="true">↗</span></a><div class="department-grid" role="group" aria-label="Структурні підрозділи: Житомирський агротехнічний фаховий коледж"><a class="organisation-tile" href="https://zhatk.zt.ua/osvitnij-proczes/kafedri/kafedra-avtomobilnij-transport/" target="_blank" rel="noopener noreferrer"><span class="organisation-mark"><img src="assets/organisations/transport.png" alt="" width="44" height="44" loading="lazy"></span><span class="organisation-copy"><small>Кафедра</small><strong>Автомобільний транспорт</strong></span><span class="external-arrow" aria-hidden="true">↗</span></a><a class="organisation-tile" href="https://zhatk.zt.ua/osvitnij-proczes/kafedri/zagalnotehnichni-discziplini/pro-kafedru/" target="_blank" rel="noopener noreferrer"><span class="organisation-mark department-image"><img src="assets/organisations/mechanics-preview.png" alt="" width="44" height="44" loading="lazy"></span><span class="organisation-copy"><small>Кафедра</small><strong>Загальнотехнічні дисципліни</strong></span><span class="external-arrow" aria-hidden="true">↗</span></a></div></details>
+<details class="organisation-group" id="polissia" hidden><summary class="organisation-tile organisation-summary"><span class="organisation-mark"><img src="assets/organisations/polissia.svg" alt="" width="44" height="44" loading="lazy"></span><span class="organisation-copy"><small>Заклад освіти</small><strong>Поліський національний університет</strong></span><span class="disclosure-chevron" aria-hidden="true">⌄</span></summary><a class="institution-site" href="https://polissiauniver.edu.ua/" target="_blank" rel="noopener noreferrer">Офіційний сайт закладу <span aria-hidden="true">↗</span></a><div class="department-grid" role="group" aria-label="Структурні підрозділи: Поліський національний університет"><a class="organisation-tile" href="https://polissiauniver.edu.ua/кафедра-агроінженерії-та-технічного/" target="_blank" rel="noopener noreferrer"><span class="organisation-mark"><img src="assets/organisations/polissia.svg" alt="" width="44" height="44" loading="lazy"></span><span class="organisation-copy"><small>Кафедра</small><strong>Агроінженерії та технічного сервісу</strong></span><span class="external-arrow" aria-hidden="true">↗</span></a></div></details>
+<!-- /shared-credits:organisations -->
+        </div>
+      </section>
+      <details class="about-project" id="about-project">
+        <summary>Про проєкт</summary>
+        <div class="project-credits">
+<!-- shared-credits:about -->
+<p>АвтоМетод — інтерактивні методичні матеріали та інструменти для навчальних інженерних розрахунків.</p><dl><dt>Засновник</dt><dd data-credit-role="founder"><span title="Ломакін Володимир Олександрович">Ломакін В. О.</span>, <span title="кандидат технічних наук">к. т. н.</span></dd><dt>Автори</dt><dd data-credit-role="author"><span title="Ломакін Володимир Олександрович">Ломакін В. О.</span>, <span title="кандидат технічних наук">к. т. н.</span>; <span title="Мельничук Сергій Володимирович">Мельничук С. В.</span>, <span title="кандидат технічних наук, доцент">к. т. н., доц.</span>; <span title="Ємець Богдан Володимирович">Ємець Б. В.</span>, <span title="кандидат технічних наук, доцент">к. т. н., доц.</span>; <span title="Рудзінський Володимир Васильович">Рудзінський В. В.</span>, <span title="доктор технічних наук, професор">д. т. н., проф.</span>; <span title="Рябчук Олександр Павлович">Рябчук О. П.</span>, <span title="кандидат сільськогосподарських наук">к. с.-г. н.</span></dd><dt>Учасники розроблення (contributors)</dt><dd data-credit-role="contributor"><span class="credit-institution">Житомирський агротехнічний фаховий коледж</span><span class="credit-placeholder">Список доповнюється.</span></dd></dl><p data-credit-note="aiAssistance">Допомога ШІ: підготовка текстів, переклад, допомога з програмуванням і перевірки (моделі родини GPT-6).</p><p class="credit-copyright">© <span data-credit-year>2026</span> АвтоМетод.</p>
+<!-- /shared-credits:about -->
+        </div>
+      </details>
+    </div>
+  </main>
+  <footer><div class="footer-identity"><span class="site-version">v0.5.0</span><span>© <span id="copyright-year">2026</span> <span data-i18n="brand">АвтоМетод</span></span><span data-i18n="footer">Інтерактивні методичні матеріали</span></div><a href="#top" data-i18n="backTop">До початку ↑</a></footer>
+  <dialog id="account-dialog" aria-labelledby="account-dialog-heading" aria-describedby="account-description">
+    <button type="button" class="account-close" data-account-close aria-label="Закрити" data-i18n-aria-label="close">×</button>
+    <p class="eyebrow" data-i18n="account">Обліковий запис</p>
+    <h2 id="account-dialog-heading" data-account-heading>Увійти</h2>
+    <p id="account-description">Увійдіть до свого облікового запису АвтоМетод.</p>
+    <form id="account-form" method="post" action="/api/auth/signin">
+      <label id="account-email-field"><span data-i18n="email">Електронна пошта</span><input name="email" type="email" autocomplete="username" maxlength="254" required></label>
+      <label id="account-password-field"><span data-i18n="password">Пароль</span><input name="password" type="password" autocomplete="current-password" maxlength="128" required><small id="account-password-hint" data-i18n="passwordHint" hidden>Щонайменше 8 символів.</small></label>
+      <label id="account-confirm-field" hidden><span data-i18n="confirmPassword">Повторіть пароль</span><input name="confirmation" type="password" autocomplete="new-password" maxlength="128"></label>
+      <p id="account-status" role="status" aria-live="polite"></p>
+      <button id="account-submit" class="account-submit" type="submit" disabled>Увійти</button>
+    </form>
+    <div class="account-links"><button id="account-forgot" type="button" data-i18n="forgotPassword">Забули пароль?</button><button id="account-switch" type="button">Створити обліковий запис</button></div>
+  </dialog>
+</body>
+</html>
