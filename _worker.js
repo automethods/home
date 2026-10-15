@@ -1,4 +1,6 @@
 // Cloudflare Pages advanced-mode worker. No credentials are included in this file.
+import { Buffer } from 'node:buffer';
+
 const accessCookie = 'am_access';
 const refreshCookie = 'am_refresh';
 
@@ -139,6 +141,116 @@ export async function handleAuth(request, env, transport = fetch) {
 
 export default {
   async fetch(request, env) {
-    return await handleAuth(request, env) || env.ASSETS.fetch(request);
+    return await handleFeedback(request, env) || await handleAuth(request, env) || env.ASSETS.fetch(request);
   },
 };
+
+const maxFiles = 10;
+const maxFileBytes = 20_000_000;
+const maxRequestBytes = maxFileBytes + 65_536;
+const fileTypes = new Set(['png', 'jpg', 'jpeg', 'webp', 'gif', 'pdf', 'csv', 'txt', 'log', 'json', 'zip', 'docx', 'xlsx', 'mp4', 'webm']);
+const emailAddress = value => typeof value === 'string' && value.length <= 254 && /^[^\s<>@,;]+@[^\s<>@,;]+\.[^\s<>@,;]+$/.test(value);
+function feedbackConfigured(env) {
+  return Boolean(env.RESEND_API_KEY?.startsWith('re_') && emailAddress(env.FEEDBACK_FROM) && emailAddress(env.FEEDBACK_TO) && env.TURNSTILE_SITE_KEY && env.TURNSTILE_SECRET_KEY);
+}
+
+// Encode one small, three-byte-aligned chunk at a time. A 20 MB submission
+// must not create several full-size copies of its Base64/JSON representation.
+function emailBody(message, files) {
+  const encoder = new TextEncoder();
+  async function* chunks() {
+    yield encoder.encode(JSON.stringify(message).slice(0, -1) + ',"attachments":[');
+    for (let index = 0; index < files.length; index++) {
+      const file = files[index];
+      yield encoder.encode((index ? ',' : '') + '{"filename":' + JSON.stringify(file.name) + ',"content":"');
+      for (let offset = 0; offset < file.size; offset += 49_152) {
+        const bytes = await file.slice(offset, offset + 49_152).arrayBuffer();
+        yield encoder.encode(Buffer.from(bytes).toString('base64'));
+      }
+      yield encoder.encode('"}');
+    }
+    yield encoder.encode(']}');
+  }
+  const iterator = chunks();
+  return new ReadableStream({
+    async pull(controller) {
+      try {
+        const { value, done } = await iterator.next();
+        if (done) controller.close(); else controller.enqueue(value);
+      } catch (error) { controller.error(error); }
+    },
+    cancel() { return iterator.return(); },
+  });
+}
+
+export async function handleFeedback(request, env, transport = fetch) {
+  const url = new URL(request.url);
+  if (url.pathname !== '/api/feedback' && url.pathname !== '/api/feedback/config') return null;
+  if (url.pathname === '/api/feedback/config') {
+    if (request.method !== 'GET') return response({ error: 'method_not_allowed' }, 405);
+    return response({ configured: feedbackConfigured(env), siteKey: feedbackConfigured(env) ? env.TURNSTILE_SITE_KEY : '', maxFiles, maxFileBytes });
+  }
+  if (request.method !== 'POST') return response({ error: 'method_not_allowed' }, 405);
+  if (request.headers.get('Origin') !== url.origin) return response({ error: 'invalid_origin' }, 403);
+  if (!feedbackConfigured(env)) return response({ error: 'feedback_unconfigured' }, 503);
+  if (!request.headers.get('Content-Type')?.startsWith('multipart/form-data;')) return response({ error: 'invalid_input' }, 415);
+  if (Number(request.headers.get('Content-Length')) > maxRequestBytes) return response({ error: 'files_too_large' }, 413);
+  const token = request.headers.get('X-Turnstile-Token');
+  if (!token || token.length > 2048) return response({ error: 'verification_failed' }, 403);
+  try {
+    // Optional Cloudflare Rate Limiting binding; Turnstile remains mandatory.
+    if (env.FEEDBACK_RATE_LIMITER) {
+      const limit = await env.FEEDBACK_RATE_LIMITER.limit({ key: request.headers.get('CF-Connecting-IP') || 'unknown' });
+      if (!limit.success) return response({ error: 'rate_limit' }, 429);
+    }
+    const verification = await transport('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: AbortSignal.timeout(10_000),
+      body: JSON.stringify({ secret: env.TURNSTILE_SECRET_KEY, response: token, remoteip: request.headers.get('CF-Connecting-IP') || undefined }),
+    });
+    if (!verification.ok) return response({ error: 'service_unavailable' }, 503);
+    const verified = await verification.json();
+    if (!verified.success || verified.action !== 'feedback' || verified.hostname !== url.hostname) return response({ error: 'verification_failed' }, 403);
+
+    let bytes = 0;
+    let tooLarge = false;
+    const bounded = request.body.pipeThrough(new TransformStream({ transform(chunk, controller) {
+      bytes += chunk.byteLength;
+      if (bytes > maxRequestBytes) { tooLarge = true; throw new Error('files_too_large'); }
+      controller.enqueue(chunk);
+    } }));
+    let input;
+    try {
+      input = await new Request(request.url, { method: 'POST', headers: request.headers, body: bounded, duplex: 'half' }).formData();
+    } catch { return response({ error: tooLarge ? 'files_too_large' : 'invalid_input' }, tooLarge ? 413 : 400); }
+    const field = name => typeof input.get(name) === 'string' ? input.get(name).trim() : '';
+    if (field('website')) return response({ error: 'invalid_input' }, 400);
+    const kind = field('kind');
+    const text = field('message');
+    const reply = field('reply_email');
+    const id = field('submission_id');
+    if (!['issue', 'suggestion', 'other'].includes(kind) || !text || text.length > 10_000 || (reply && !emailAddress(reply)) || !/^[a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12}$/i.test(id)) return response({ error: 'invalid_input' }, 400);
+    const files = input.getAll('files').filter(file => typeof file !== 'string' && file.name);
+    if (files.length > maxFiles) return response({ error: 'too_many_files' }, 400);
+    if (files.reduce((sum, file) => sum + file.size, 0) > maxFileBytes) return response({ error: 'files_too_large' }, 413);
+    for (const file of files) {
+      if (file.name.length > 180 || /[\x00-\x1f\x7f/\\]/.test(file.name) || !fileTypes.has(file.name.split('.').pop().toLowerCase())) return response({ error: 'unsupported_file' }, 400);
+    }
+    // Never include query strings/fragments, which can contain account tokens.
+    let page = '';
+    try { const source = new URL(field('page')); if (source.origin === url.origin) page = source.origin + source.pathname; } catch {}
+    const version = field('version').replace(/[^\w.\-]/g, '').slice(0, 32);
+    const message = {
+      from: env.FEEDBACK_FROM, to: [env.FEEDBACK_TO], ...(reply ? { reply_to: reply } : {}),
+      subject: `[AutoMethods] ${kind === 'issue' ? 'Issue report' : kind === 'suggestion' ? 'Suggestion' : 'Feedback'} · ${id.slice(0, 8)}`,
+      text: `${text}\n\n---\nReply email: ${reply || 'Not supplied'}\nPage: ${page || url.origin}\nVersion: ${version || 'Unknown'}\nLanguage: ${field('language') === 'uk' ? 'uk' : 'en'}\nFiles: ${files.length}\nReference: ${id}`,
+    };
+    const sent = await transport('https://api.resend.com/emails', {
+      method: 'POST', headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json', 'Idempotency-Key': `feedback/${id}` },
+      body: emailBody(message, files), duplex: 'half', signal: AbortSignal.timeout(60_000),
+    });
+    if (!sent.ok) return response({ error: sent.status === 429 ? 'rate_limit' : 'send_failed' }, sent.status === 429 ? 429 : 502);
+    const receipt = await sent.json();
+    if (!receipt.id) return response({ error: 'send_failed' }, 502);
+    return response({ message: 'feedback_sent', reference: id.slice(0, 8) });
+  } catch { return response({ error: 'service_unavailable' }, 503); }
+}

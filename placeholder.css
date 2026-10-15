@@ -1,0 +1,11 @@
+.project-placeholder { max-width: 1000px; padding-top: clamp(36px, 7vw, 90px); padding-bottom: 80px; min-height: calc(100dvh - 160px); }
+.project-breadcrumb { margin-bottom: 40px; font-size: 13px; color: var(--muted); }
+.project-breadcrumb a:hover { color: var(--accent); }
+.project-placeholder h1 { max-width: 850px; margin: 24px 0; font-size: clamp(32px, 5vw, 58px); line-height: 1.12; letter-spacing: -.035em; overflow-wrap: anywhere; }
+.project-lead { max-width: 700px; color: #c0cfd2; font-size: 18px; line-height: 1.7; }
+.project-preparation { border: 1px solid var(--line); border-top: 2px solid var(--category); border-radius: 12px; padding: clamp(20px, 4vw, 36px); margin: 36px 0; background: #101f29; }
+.project-preparation h2 { font-size: 22px; margin: 0 0 20px; }
+.project-preparation ul { padding-left: 22px; color: var(--muted); line-height: 1.8; }
+.project-preparation li + li { margin-top: 10px; }
+.project-preparation p { color: #c0cfd2; font-size: 14px; line-height: 1.7; margin-bottom: 0; }
+.project-placeholder > .action { max-width: 300px; }
