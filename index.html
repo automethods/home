@@ -6,13 +6,14 @@
   <meta name="theme-color" content="#08131c">
   <title data-i18n="pageTitle">АвтоМетод — інтерактивні інженерні розрахунки</title>
   <meta name="description" data-i18n-content="pageDescription" content="Методичні матеріали для інженерного навчання: пояснення, формули, інтерактивні розрахунки, порівняння варіантів і звіти в браузері.">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=0.5.0">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=0.5.2">
   <link rel="stylesheet" href="site.css">
   <link rel="stylesheet" href="card-models.css">
   <script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}</script>
   <script type="module" src="i18n.js"></script>
   <script type="module" src="card-models.js"></script>
   <script type="module" src="site.js"></script>
+  <script type="module" src="feedback.js"></script>
   <script type="module" src="credits.js"></script>
   <link rel="canonical" href="https://automethods.com/">
 </head>
@@ -21,12 +22,13 @@
   <header>
     <div class="brand-block">
     <a class="brand" href="#top" aria-label="Головна сторінка АвтоМетод" data-i18n-aria-label="home">
-      <img src="assets/favicon.svg?v=0.5.0" alt="" width="34" height="34"><span data-i18n="brand">АвтоМетод</span>
+      <img src="assets/favicon.svg?v=0.5.2" alt="" width="34" height="34"><span data-i18n="brand">АвтоМетод</span>
     </a>
-    <span class="header-version" title="Версія головної сторінки" data-i18n-title="homepageVersion">v0.5.0</span>
+    <span class="header-version" title="Версія головної сторінки" data-i18n-title="homepageVersion">v0.5.3</span>
     </div>
     <div class="header-tools">
     <div class="account-controls" role="group" aria-label="Обліковий запис" data-i18n-aria-label="account">
+      <button type="button" class="account-button" data-feedback-open data-i18n="feedbackButton" disabled>Зворотний зв’язок</button>
       <span id="account-user" class="account-user" hidden></span>
       <button type="button" class="account-button" data-account-action="signin" data-i18n="signIn">Увійти</button>
       <button type="button" class="account-button account-signup" data-account-action="signup" data-i18n="signUp">Реєстрація</button>
@@ -62,7 +64,7 @@
         </div>
         <div class="cards">
           <article class="card" id="vehicle" data-category="automotive">
-            <div class="card-top"><span class="number">01</span><span class="project-version" data-i18n-title="publishedVersion" title="Опублікована версія" data-project-version="vehicle">v0.5.02</span><span class="availability" data-i18n="available">Навчальна версія</span></div>
+            <div class="card-top"><span class="number">01</span><span class="project-version" data-i18n-title="publishedVersion" title="Опублікована версія" data-project-version="vehicle">v0.4.65</span><span class="availability" data-i18n="available">Навчальна версія</span></div>
             <div class="card-model" data-scene="vehicle" tabindex="0" role="region" aria-label="Інтерактивна модель спортивного автомобіля" data-i18n-aria-label="modelVehicle" aria-describedby="hint-vehicle" title="Стрілки обертають, + та − змінюють масштаб. На сенсорному екрані використовуйте два пальці." data-i18n-title="keyboardHint" aria-busy="true">
               <span class="model-status" role="status" data-i18n="loadingVehicle">Завантаження спортивного автомобіля…</span>
               <span class="model-hint" id="hint-vehicle" data-i18n="hint">Перетягуйте для обертання · Прокручуйте для масштабування</span>
@@ -71,7 +73,7 @@
             <h3 data-i18n="subjectVehicle">Автомобілі (теорія експлуатаційних властивостей та розрахунку)</h3>
             <p data-i18n="vehicleIntro">Досліджуйте опір руху, тягу, розгін та енергетичні витрати. Порівнюйте автомобілі з ДВЗ, електричним і гібридним приводом.</p>
             <details class="project-detail"><summary data-i18n="scope">Що охоплює проєкт</summary><p data-i18n="vehicleDetail">Задавайте клас автомобіля, масу, навантаження й дорожні умови; розраховуйте потрібну потужність, трансмісію та окремі вузли. Перевіряйте вплив параметрів на розгін і витрати енергії за WLTC або власним профілем швидкості. Формуйте звіт із формулами, підстановками та графіками.</p></details>
-            <a class="action" href="https://hybridtrustmail.github.io/Automobile/"><span data-i18n="explore">Перейти до проєкту</span><span aria-hidden="true">↗</span></a>
+            <a class="action" href="/projects/automobile/"><span data-i18n="explore">Перейти до проєкту</span><span aria-hidden="true">↗</span></a>
           </article>
           <article class="card" id="powertrain" data-category="automotive">
             <div class="card-top"><span class="number">02</span><span class="project-version" data-i18n-title="publishedVersion" title="Опублікована версія" data-project-version="powertrain">v0.8.4</span><span class="availability" data-i18n="available">Навчальна версія</span></div>
@@ -104,9 +106,10 @@
               <span class="model-hint" id="hint-gearbox" data-i18n="hint">Перетягуйте для обертання · Прокручуйте для масштабування</span>
             </div>
             <span class="card-category" data-i18n="categoryMechanics">Загальна механіка</span>
-            <h3 data-i18n="subjectGearbox">Зубчасті передачі та редуктори</h3>
-            <p data-i18n="gearboxIntro">Майбутні методичні матеріали з кінематики, передатних чисел та розрахунку механічних передач.</p>
+            <h3 data-i18n="subjectMechanics">Деталі машин</h3>
+            <p data-i18n="mechanicsIntro">Майбутні методичні матеріали з розрахунку та конструювання деталей машин: передач, валів, підшипників і з’єднань.</p>
             <span class="future-note" data-i18n="futureNote">Матеріали ще не опубліковано</span>
+            <a class="action" href="projects/mechanics/"><span data-i18n="projectOverview">Про проєкт</span><span aria-hidden="true">→</span></a>
           </article>
           <article class="future-card" data-category="automotive">
             <div class="card-top"><span class="number">05</span><span class="project-version"><span data-i18n="foundationVersion">Основа</span> v0.1.0</span><span class="availability planned" data-i18n="planned">Готується</span></div>
@@ -118,6 +121,7 @@
             <h3 data-i18n="subjectCea">Комерційна експлуатація автомобілів</h3>
             <p data-i18n="ceaIntro">Майбутній проєкт: маршрути, розклад, автопарк, енергоспоживання та експлуатаційні витрати.</p>
             <span class="future-note" data-i18n="futureNote">Матеріали ще не опубліковано</span>
+            <a class="action" href="projects/cea/"><span data-i18n="projectOverview">Про проєкт</span><span aria-hidden="true">→</span></a>
           </article>
         </div>
       </section>
@@ -154,7 +158,27 @@
       </details>
     </div>
   </main>
-  <footer><div class="footer-identity"><span class="site-version">v0.5.0</span><span>© <span id="copyright-year">2026</span> <span data-i18n="brand">АвтоМетод</span></span><span data-i18n="footer">Інтерактивні методичні матеріали</span></div><a href="#top" data-i18n="backTop">До початку ↑</a></footer>
+  <footer><div class="footer-identity"><span class="site-version">v0.5.3</span><span>© <span id="copyright-year">2026</span> <span data-i18n="brand">АвтоМетод</span></span><span data-i18n="footer">Інтерактивні методичні матеріали</span></div><div class="footer-links"><button type="button" data-feedback-open data-i18n="feedbackButton" disabled>Зворотний зв’язок</button><a href="#top" data-i18n="backTop">До початку ↑</a></div></footer>
+  <dialog id="feedback-dialog" aria-labelledby="feedback-heading" aria-describedby="feedback-description">
+    <button type="button" class="account-close" data-feedback-close aria-label="Закрити" data-i18n-aria-label="close">×</button>
+    <p class="eyebrow" data-i18n="feedbackButton">Зворотний зв’язок</p>
+    <h2 id="feedback-heading" data-i18n="feedbackHeading">Повідомити про проблему чи запропонувати ідею</h2>
+    <p id="feedback-description" data-i18n="feedbackDescription">Опишіть, що сталося або що можна покращити. Вхід до облікового запису не потрібний.</p>
+    <form id="feedback-form" method="post" action="/api/feedback" enctype="multipart/form-data">
+      <fieldset id="feedback-fields">
+        <label><span data-i18n="feedbackKind">Тип повідомлення</span><select name="kind"><option value="issue" data-i18n="feedbackIssue">Повідомити про проблему</option><option value="suggestion" data-i18n="feedbackSuggestion">Запропонувати покращення</option><option value="other" data-i18n="feedbackOther">Інше</option></select></label>
+        <label><span data-i18n="feedbackMessage">Повідомлення</span><textarea name="message" rows="5" maxlength="10000" required></textarea></label>
+        <label><span data-i18n="feedbackEmail">Ваша електронна пошта (необов’язково, для відповіді)</span><input name="reply_email" type="email" autocomplete="email" maxlength="254"></label>
+        <label><span data-i18n="feedbackFiles">Прикріпити файли (необов’язково)</span><input id="feedback-files" name="files" type="file" multiple accept=".png,.jpg,.jpeg,.webp,.gif,.pdf,.csv,.txt,.log,.json,.zip,.docx,.xlsx,.mp4,.webm" aria-describedby="feedback-file-hint feedback-file-summary"><small id="feedback-file-hint" data-i18n="feedbackFileHint">До 10 файлів, разом до 20 МБ. Зображення, PDF, CSV, TXT, LOG, JSON, ZIP, DOCX, XLSX, MP4, WEBM.</small></label>
+        <div id="feedback-file-summary" aria-live="polite"></div>
+        <label class="feedback-trap" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+        <p class="feedback-privacy" data-i18n="feedbackPrivacy">Повідомлення та файли буде надіслано команді АвтоМетод електронною поштою разом з адресою сторінки та версією сайту. Не додавайте паролі та конфіденційні дані.</p>
+        <div id="feedback-verification"></div>
+      </fieldset>
+      <p id="feedback-status" role="status" aria-live="polite"></p>
+      <button id="feedback-submit" class="account-submit" type="submit" disabled data-i18n="feedbackSend">Надіслати повідомлення</button>
+    </form>
+  </dialog>
   <dialog id="account-dialog" aria-labelledby="account-dialog-heading" aria-describedby="account-description">
     <button type="button" class="account-close" data-account-close aria-label="Закрити" data-i18n-aria-label="close">×</button>
     <p class="eyebrow" data-i18n="account">Обліковий запис</p>
