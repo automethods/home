@@ -1,8 +1,17 @@
-"""Keep research documents out of Automobile website publication copies."""
+"""Prepare Automobile research references and language startup for publication."""
 from pathlib import PurePosixPath
 
 
 GUIDE_PDFS = {'downloads/methodical-guide.pdf', 'downloads/methodical-guide-en.pdf'}
+LANGUAGE_SCRIPTS = b'\n  <script src="/language.js"></script>\n  <script src="/api/language.js"></script>'
+
+
+def add_language_bootstrap(content):
+    if b'<script src="/api/language.js"></script>' in content:
+        return content
+    if b'<head>' not in content:
+        raise ValueError('Automobile index.html is missing its head element')
+    return content.replace(b'<head>', b'<head>' + LANGUAGE_SCRIPTS, 1)
 
 
 def is_research_document(relative):

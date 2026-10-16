@@ -15,6 +15,7 @@
     "feedback.js",
     "i18n.js",
     "index.html",
+    "language.js",
     "models/bus.glb",
     "models/chassis.glb",
     "models/commercial-fleet.glb",

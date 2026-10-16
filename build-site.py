@@ -6,7 +6,7 @@ import json
 import shutil
 from urllib.request import Request, urlopen
 from zipfile import ZipFile
-from automobile_publication import is_research_document
+from automobile_publication import add_language_bootstrap, is_research_document
 
 
 def assemble(root, manifest, archive):
@@ -24,6 +24,8 @@ def assemble(root, manifest, archive):
                 raise ValueError(f'Automobile checksum mismatch: {relative}')
             if not is_research_document(relative):
                 files[relative] = content
+
+    files['index.html'] = add_language_bootstrap(files['index.html'])
 
     output = root / 'public'
     if output.exists():

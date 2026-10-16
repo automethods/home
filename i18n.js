@@ -298,23 +298,31 @@ const messages = {
     "authLinkExpired": "Посилання вже використано або термін його дії завершився. Запросіть нове посилання."
   }
 };
-let language = 'uk';
-try { language = localStorage.getItem('motion-lab-language') === 'en' ? 'en' : 'uk'; } catch {}
+let language = globalThis.AutoMethodsLanguage?.language || 'en';
+try {
+  const saved = localStorage.getItem('motion-lab-language');
+  if (saved === 'en' || saved === 'uk') language = saved;
+} catch {}
 export function t(key, values = {}) {
   return Object.entries(values).reduce((text, [name, value]) => text.replaceAll(`{${name}}`, value), messages[language][key] || messages.en[key] || key);
 }
 function applyLanguage() {
   document.documentElement.lang = language;
+  document.documentElement.dataset.language = language;
   for (const element of document.querySelectorAll('[data-i18n]')) element.textContent = t(element.dataset.i18n);
   for (const attribute of ['aria-label', 'title', 'content', 'alt']) {
     for (const element of document.querySelectorAll(`[data-i18n-${attribute}]`)) element.setAttribute(attribute, t(element.getAttribute(`data-i18n-${attribute}`)));
   }
-  for (const button of document.querySelectorAll('[data-language]')) button.setAttribute('aria-pressed', String(button.dataset.language === language));
+  for (const button of document.querySelectorAll('button[data-language]')) button.setAttribute('aria-pressed', String(button.dataset.language === language));
   document.dispatchEvent(new Event('languagechange'));
 }
-for (const button of document.querySelectorAll('[data-language]')) button.addEventListener('click', () => {
+for (const button of document.querySelectorAll('button[data-language]')) button.addEventListener('click', () => {
   language = button.dataset.language;
   try { localStorage.setItem('motion-lab-language', language); } catch {}
+  applyLanguage();
+});
+document.addEventListener('automethodslanguagechange', () => {
+  language = globalThis.AutoMethodsLanguage.language;
   applyLanguage();
 });
 applyLanguage();

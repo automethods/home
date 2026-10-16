@@ -139,9 +139,22 @@ export async function handleAuth(request, env, transport = fetch) {
   }
 }
 
+export function handleLanguage(request) {
+  if (new URL(request.url).pathname !== '/api/language.js') return null;
+  if (!['GET', 'HEAD'].includes(request.method)) {
+    const result = response({ error: 'method_not_allowed' }, 405);
+    result.headers.set('Allow', 'GET, HEAD');
+    return result;
+  }
+  const language = request.cf?.country === 'UA' ? 'uk' : 'en';
+  return new Response(request.method === 'HEAD' ? null : `globalThis.AutoMethodsLanguage?.applyCountryLanguage('${language}');\n`, {
+    headers: { 'Content-Type': 'application/javascript; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' },
+  });
+}
+
 export default {
   async fetch(request, env) {
-    return await handleFeedback(request, env) || await handleAuth(request, env) || env.ASSETS.fetch(request);
+    return handleLanguage(request) || await handleFeedback(request, env) || await handleAuth(request, env) || env.ASSETS.fetch(request);
   },
 };
 
