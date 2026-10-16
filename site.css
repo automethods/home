@@ -51,6 +51,9 @@ header { min-height: 80px; display: flex; align-items: center; justify-content: 
 .footer-links { display: flex; align-items: center; flex-wrap: wrap; gap: 20px; }
 .footer-links button { padding: 0; border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
 .footer-links button:hover { color: var(--accent); }
+.support-placeholder { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.footer-links .support-button:disabled { padding: 5px 10px; border: 1px solid #ffffff24; border-radius: 5px; background: #ffffff05; color: #99a0a6; cursor: not-allowed; }
+.support-status { color: #8a949d; font-size: 11px; }
 #feedback-dialog { width: min(600px, calc(100% - 24px)); max-height: calc(100dvh - 24px); padding: clamp(18px, 4vw, 28px); background: #101f29; color: #eaf2f3; border: 1px solid #41606b; border-radius: 12px; box-shadow: 0 25px 80px #00000060; }
 #feedback-dialog::backdrop { background: #030b12b8; }
 #feedback-dialog h2 { padding-right: 18px; margin: 0 0 16px; font-size: 24px; line-height: 1.3; }
