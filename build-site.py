@@ -6,6 +6,7 @@ import json
 import shutil
 from urllib.request import Request, urlopen
 from zipfile import ZipFile
+from automobile_publication import is_research_document
 
 
 def assemble(root, manifest, archive):
@@ -21,7 +22,8 @@ def assemble(root, manifest, archive):
             content = zipped.read(prefix + relative)
             if hashlib.sha256(content).hexdigest() != expected:
                 raise ValueError(f'Automobile checksum mismatch: {relative}')
-            files[relative] = content
+            if not is_research_document(relative):
+                files[relative] = content
 
     output = root / 'public'
     if output.exists():
