@@ -1,8 +1,10 @@
 {
   "homeFiles": [
+    "404.html",
     "_routes.json",
     "_worker.js",
     "assets/credits/views.js",
+    "assets/favicon.png",
     "assets/favicon.svg",
     "assets/organisations/college.svg",
     "assets/organisations/mechanics-preview.png",
