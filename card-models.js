@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { t } from './i18n.js';
+import { t } from './i18n.js?v=0.5.9';
 import { addBusLights } from './bus-lights.js';
 
 const loader = new GLTFLoader();

@@ -1,4 +1,4 @@
-import { t } from './i18n.js';
+import { t } from './i18n.js?v=0.5.9';
 
 const dialog = document.querySelector('#account-dialog');
 const form = document.querySelector('#account-form');
