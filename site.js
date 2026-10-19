@@ -128,7 +128,8 @@ const result = url.searchParams.get('account');
 if (result) {
   url.searchParams.delete('account');
   history.replaceState(null, '', url.pathname + url.search + url.hash);
-  if (result === 'reset' && user) show('reset');
+  if (result === 'signin') show('signin');
+  else if (result === 'reset' && user) show('reset');
   else if (result === 'confirmed' && user) { feedbackKey = 'authEmailConfirmed'; feedback.hidden = false; render(); }
   else { show('signin'); message = result === 'unconfigured' ? 'authUnconfigured' : 'authLinkExpired'; isError = true; render(); }
 }
