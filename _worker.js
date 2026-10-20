@@ -154,7 +154,7 @@ export function handleLanguage(request) {
 
 export default {
   async fetch(request, env) {
-    return await handleMechanicsDownloads(request, env) || handleLanguage(request) || await handleFeedback(request, env) || await handleAuth(request, env) || env.ASSETS.fetch(request);
+    return await handleProjectDownloads(request, env) || handleLanguage(request) || await handleFeedback(request, env) || await handleAuth(request, env) || env.ASSETS.fetch(request);
   },
 };
 
@@ -268,10 +268,15 @@ export async function handleFeedback(request, env, transport = fetch) {
   } catch { return response({ error: 'service_unavailable' }, 503); }
 }
 
-// Machine Elements shares the homepage cookie and verifies it before downloads.
-export async function handleMechanicsDownloads(request, env, transport=fetch) {
+// Project documents share the homepage cookie and verify it before downloads.
+export async function handleProjectDownloads(request, env, transport=fetch) {
  let path;try{path=decodeURIComponent(new URL(request.url).pathname);}catch{return new Response('Invalid URL',{status:400});}
- if(!/^\/projects\/(?:mechanics|machine-elements|detali-mashyn)\/(?:downloads|docs)\//.test(path))return null;
+ const project=path.match(/^\/projects\/(automobile|mechanics|machine-elements|detali-mashyn|tea|engine|ice)\/(.*)$/i);
+ if(!project)return null;
+ const relative=project[2];
+ const document=/^(?:downloads|docs)(?:\/|$)/i.test(relative)||/\.pdf(?:\/|$)/i.test(relative)||
+  (/^(?:build|examples)(?:\/|$)/i.test(relative)&&!/\.(?:json|csv)$/i.test(relative));
+ if(!document)return null;
  const sessionRequest=new Request(new URL('/api/session',request.url),{headers:request.headers});
  const session=await handleAuth(sessionRequest,env,transport),data=await session.json();
  if(!data.configured||!data.user?.id)return response({error:'signin_required'},401,session.headers.getSetCookie());
@@ -280,3 +285,6 @@ export async function handleMechanicsDownloads(request, env, transport=fetch) {
  for(const value of session.headers.getSetCookie())headers.append('Set-Cookie',value);
  return new Response(result.body,{status:result.status,headers});
 }
+
+// Preserve the existing integration name while all projects use the shared guard.
+export const handleMechanicsDownloads=handleProjectDownloads;

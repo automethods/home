@@ -3,9 +3,13 @@
   "include": [
     "/api/*",
     "/auth/*",
+    "/projects/automobile/*",
     "/projects/mechanics/*",
     "/projects/machine-elements/*",
-    "/projects/detali-mashyn/*"
+    "/projects/detali-mashyn/*",
+    "/projects/tea/*",
+    "/projects/engine/*",
+    "/projects/ice/*"
   ],
   "exclude": []
 }
