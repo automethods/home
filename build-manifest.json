@@ -42,9 +42,9 @@
     "vendor/three/examples/jsm/utils/SkeletonUtils.js"
   ],
   "automobile": {
-    "version": "0.4.66",
+    "version": "0.4.67",
     "repository": "automethods/automobile",
-    "commit": "808e59a7ec27628851ec3a7b6f0793dd4ebc23b7",
+    "commit": "c4e0b840cb2b329afa3232273c431bf919cebe9a",
     "files": {
       ".nojekyll": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
       "Data/Vehicle/cycles/NEDC.csv": "0dd9ba4ef7f6de1bde761885e28e87ef3d2eacb434a9fc571a0104357a624f9e",
@@ -352,7 +352,7 @@
       "Images/vehicle-N1.svg": "69170c1d71f66db892211647954f6fa4857f44b347929d98c7ef8085c38c9d0b",
       "Images/vehicle-N2.svg": "6fcf0042333d6d89615007f9553fc189e8835b338ce791e8c9e1c734f74001db",
       "Images/vehicle-N3.svg": "7e936f92ac455d753e31c1f6c949f2786c774c154aa44c42d9f6c12aed7d6f9c",
-      "README.md": "02f03059ea4c9a87af9cae90470aecda83cddde813166f8417f1d412cf7146e4",
+      "README.md": "afad1e86013b9b16a1a8d461acf482231cb936f752aa57ecb23ffc4b70a4b633",
       "assets/department-hazards-off-CCP16_hL.png": "d9a933c9f7a338fbe56b947f23e0a72be0425e4f33afb2ab57faf6be666e9edf",
       "assets/department-hazards-on-CyoWiva8.png": "d8f100f219b4a12e6addca48a37ec082dd2c3b4b607017c80d224cabc44f4fe6",
       "assets/engdoc-runtime-4gYSjIFG.js": "7f45cc40780e77d7f0530711be3bc18daab8f227278ca5866247cc5ae35de2ae",
@@ -360,6 +360,7 @@
       "assets/index-22r2XBSk.css": "fcb6b7f86c31e780ce40898666b29e5c9840f223f0f5535a91142d52052c9105",
       "assets/index-CX30vu4l.css": "d61deb14e54173058a3312d737ecbb91068eb3cdbb4f2ca584c3385422704356",
       "assets/index-CZ1mdQT6.js": "998f061be9e74236e36ab74b6b2b8fd4602c6f0f146109c5ad416f31daff3123",
+      "assets/index-DnEYzOBe.js": "5cba62db9d9ae761a8540654ff75a409fd98a0f1328bd4080239b4b6c830e784",
       "assets/index-pjN6tl5_.js": "a8a1e759f29954416ae821eddfedd1f7fd482e3af129b191c0080664e022e392",
       "assets/layout-3d-runtime-DtArkcfl.js": "0c5af257a7c68f9102c64a6d70ba0d041ed4798e93cb3955d95a3f5a3e84878c",
       "assets/layout-3d-scene-DGXV1dMl.js": "c93ab4e0f08f3bf1e189fb1e21d2d20c4b40e11918a77a06a6c72f0674db32e5",
@@ -373,8 +374,8 @@
       "downloads/methodical-guide.html": "ea9d2ffc3ca82f99c8e0c82f0a772276a6406740a601dd5a3d0ec9a91dfcda12",
       "downloads/methodical-guide.json": "9aa0c50537eeb76f01bd54a54f0a9d784a3e4d09014b5f48bebc440fd264a0ed",
       "downloads/methodical-guide.pdf": "7aa08ac2aaccfb49d57c40cd261933fdc66d392961036fbddd880cc5d53c1266",
-      "index.html": "6148c515dc1d9210d6d2b5d478b7fa2d4eb33b5ffb8bdfdf0934bc2c0ede4a9e",
-      "publication-manifest.json": "79c11c04170aaaa3db17495d162a28d3745ae911ae6dfef2d6dd6d050730e6da",
+      "index.html": "3176f778990f114e58974bb076beff04890a2dc74230d715c4387de313fa4b8d",
+      "publication-manifest.json": "6ff5c73075a6a3d4afb632cb829bf757c9d44849e9ea587d171e5665aa2d4a29",
       "vendor/mathjax/LICENSE.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
       "vendor/mathjax/ORIGIN.json": "c12f1e6e5b7d16affadd6c15769e430bd3c985e3012054f2d5e739c09f340639",
       "vendor/mathjax/tex-svg-full.js": "a4354ff94fd868aea0cc6eaaa79a57fda0588646fc46ee3700a349ee0a11cbe6"
@@ -691,7 +692,7 @@
       "assets/engdoc-runtime-4gYSjIFG.js",
       "assets/favicon-DgtH_dQ1.svg",
       "assets/index-22r2XBSk.css",
-      "assets/index-pjN6tl5_.js",
+      "assets/index-DnEYzOBe.js",
       "assets/layout-3d-runtime-DtArkcfl.js",
       "assets/layout-3d-scene-DGXV1dMl.js",
       "assets/logo-CcDgs7jA.svg",
