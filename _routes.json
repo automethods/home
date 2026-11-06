@@ -9,7 +9,8 @@
     "/projects/detali-mashyn/*",
     "/projects/tea/*",
     "/projects/engine/*",
-    "/projects/ice/*"
+    "/projects/ice/*",
+    "/projects/cea/*"
   ],
   "exclude": []
 }
