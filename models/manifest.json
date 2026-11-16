@@ -56,5 +56,10 @@
       "blue",
       "teal"
     ]
+  },
+  "obd-diagnostics": {
+    "source": "upload-batches/Home-v0.5.15/source-tools/build-obd-preview.py (original OBD II Lab vehicle and authored ECU cutaway)",
+    "bytes": 147152,
+    "purpose": "Homepage visual illustration; ECU enlarged, no OEM geometry"
   }
 }

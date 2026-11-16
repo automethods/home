@@ -21,3 +21,6 @@
   .model-hint { opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) { .model-hint { transition: none; } }
+
+.card-model .model-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.card-model[data-loaded] .model-poster { visibility: hidden; }

@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { t } from './i18n.js?v=0.5.14';
+import { t } from './i18n.js?v=0.5.15';
 import { addBusLights } from './bus-lights.js';
 
 const loader = new GLTFLoader();
@@ -82,7 +82,7 @@ async function createView(viewport) {
     const angle = Math.min(vertical, Math.atan(Math.tan(vertical) * camera.aspect));
     const distance = radius / Math.sin(angle) * 0.78;
     controls.target.copy(center);
-    camera.position.copy(center).add(new THREE.Vector3(1.1, 0.65, viewport.dataset.scene === 'vehicle' ? -1.4 : 1.4).normalize().multiplyScalar(distance));
+    camera.position.copy(center).add(new THREE.Vector3(1.1, 0.65, ['vehicle', 'obd'].includes(viewport.dataset.scene) ? -1.4 : 1.4).normalize().multiplyScalar(distance));
     controls.minDistance = distance * 0.5;
     controls.maxDistance = distance * 2;
     controls.update();
@@ -148,7 +148,7 @@ async function createView(viewport) {
     });
     viewport.dataset.vehicleCount = String(vehicles.length);
   } else {
-    const files = { vehicle: 'sports-car-rich', powertrain: 'chassis', gearbox: 'gearbox', commercial: 'commercial-fleet' };
+    const files = { vehicle: 'sports-car-rich', powertrain: 'chassis', gearbox: 'gearbox', commercial: 'commercial-fleet', obd: 'obd-diagnostics' };
     model = normalize(await getModel(files[key]), 4);
   }
   if (key === 'commercial') {
