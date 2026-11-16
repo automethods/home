@@ -13,11 +13,8 @@
       saved = root.localStorage.getItem(storageKey);
       automatic = root.localStorage.getItem(automaticKey);
     } catch {}
-    const preferred = (root.navigator.languages?.length ? root.navigator.languages : [root.navigator.language])
-      .map(value => typeof value === 'string' ? value.toLowerCase().split('-')[0] : '')
-      .find(supported);
     const manual = supported(saved) && saved !== automatic;
-    language = manual ? saved : preferred || countryFallback;
+    language = manual ? saved : countryFallback;
     root.document.documentElement.lang = language;
     root.document.documentElement.dataset.language = language;
     if (!manual) {

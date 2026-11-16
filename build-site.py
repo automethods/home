@@ -30,7 +30,7 @@ def verified_files(archive, release, label):
     return files
 
 
-def assemble(root, manifest, archive, mechanics_archive=None, tea_archive=None, engine_archive=None, cea_archive=None):
+def assemble(root, manifest, archive, mechanics_archive=None, tea_archive=None, engine_archive=None, cea_archive=None, obd_archive=None):
     release = manifest['automobile']
     files = {name: content for name, content in verified_files(archive, release, 'Automobile').items()
              if not is_research_document(name)}
@@ -39,7 +39,7 @@ def assemble(root, manifest, archive, mechanics_archive=None, tea_archive=None, 
     for slug, label, project_archive in [
             ('mechanics', 'Machine Elements', mechanics_archive),
             ('tea', 'TEA', tea_archive), ('engine', 'ICE', engine_archive),
-            ('cea', 'CEA', cea_archive)]:
+            ('cea', 'CEA', cea_archive), ('obd-2', 'OBD II Lab', obd_archive)]:
         if slug not in manifest:
             continue
         if project_archive is None:
@@ -81,7 +81,8 @@ def main():
     tea = download_release(manifest['tea']) if 'tea' in manifest else None
     engine = download_release(manifest['engine']) if 'engine' in manifest else None
     cea = download_release(manifest['cea']) if 'cea' in manifest else None
-    assemble(root, manifest, archive, mechanics, tea, engine, cea)
+    obd = download_release(manifest['obd-2']) if 'obd-2' in manifest else None
+    assemble(root, manifest, archive, mechanics, tea, engine, cea, obd)
 
 
 if __name__ == '__main__':
