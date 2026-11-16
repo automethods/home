@@ -1,0 +1,441 @@
+OBD II LAB 0.9.10 · 14 November 2026
+
+Clearer warning icons in the driving and service dashboards.
+
+Expand Bytes & calculation on an OBD live card to follow received hex bytes
+through decimal decoding to the displayed measurement. Sensor Conversion path
+shows analogue voltage, coolant ADC/NTC calculations, digital state hex, and
+pulse-frequency conversion. Also available in Unit map, wiring and inspector.
+Restart run.sh and refresh the browser to load this update.
+
+OBD II LAB 0.9.8 · 14 November 2026
+
+ECU defaults: 15 main readings on Petrol basic; 19 on Petrol extended.
+Includes instantaneous L/100 km, L/h, lambda, air/intake values, torque,
+shaft power, fuel used and 12 V supply. L/100 km is unavailable below 1 km/h.
+Gearbox defaults include current gear and ratio; manual gearboxes add clutch
+position, coupling and transmitted torque. Unit map and Locations scroll with
+the main page. Restart run.sh and refresh the browser to load this update.
+
+ARTICLE EXPERIMENT EDITION 0.9.7+article.1 · 14 November 2026
+
+Open Help → MAF · experiment / дослід. Run 22 fixed cases, compare contact,
+sampled validity, torque limitation and P0102 memory, then export JSON/CSV.
+This experiment creates separate vehicles and preserves the driving session.
+CLI: python3 -m obdii_lab.article_experiment --output article_results
+The 2 ms step, 50 ms MAF sampling, 0.20/0.50 s diagnostic delays and 0.7 torque
+factor are teaching assumptions. This is not OEM ECU calibration.
+
+OBD II LAB 0.9.7 — CHOOSE A VEHICLE, THEN DRIVE OR DIAGNOSE
+Release date: 13 November 2026
+
+МОВА ІНТЕРФЕЙСУ / INTERFACE LANGUAGE — 0.9.7
+
+Натисніть «Українська» вгорі сторінки, щоб перемкнути інтерфейс і довідку.
+Вибір мови зберігається; автомобіль, під’єднання сканера й записи не скидаються.
+Можна відкрити http://127.0.0.1:8765/?lang=uk одразу українською.
+PDF-посібники та зовнішні технічні довідки залишаються англійською.
+
+Choose EN / Українська in the header. The saved language follows the shared
+AutoMethods preference. Switching languages preserves the active vehicle and
+recordings. Linked reference pages and PDF books remain in English.
+
+CONTINUOUS VEHICLE AND SELECTED MODULES IN 0.9.6
+
+The clock starts automatically when you enter Drive or Diagnostics. Ignition, engine/READY and OBD connection are independent. D/R on an automatic requires engine running or READY. Gauges remain visible. Stop the vehicle, then Start WLTC; it prepares and drives the same vehicle. Press a pedal or Drive manually to take over while the vehicle keeps responding.
+
+Choosing a module in the sidebar selects the same scan-tool target; the dropdown selects it back in the sidebar. Connect explicitly opens that named unit. The ECU picker now includes its fitted MAP, lambda, rail pressure, boost, oil/knock/camshaft measurements and model fuel flow, fuel used, torque and shaft power. Cards distinguish OBD replies from model samples. Basic/Extended are teaching sensor levels, not Euro 5/6 classifications. Fuel trims, injector duration/timing and separate lambda banks are not modeled.
+
+Vite is a frontend development/build tool. This app uses Python and plain JavaScript without Vite, npm or Node at runtime. See https://vite.dev/guide/ for Vite itself.
+
+ONE OBD FOLDER · TWO DOWNLOADS: run.sh and START_HERE.txt
+
+
+LIVE DATA, PEDALS AND WLTC IN 0.9.6
+
+Live data opens with main parameters of the selected control module. Connect the virtual adapter, switch ignition on, then start the engine or READY if the measurement needs it. Values update automatically at the Refresh interval: 0.25 s, 1 s or 1 min of simulation time. Numbers shows digital values; Graphs adds a recent trend to each value. Use + Add parameter or a card’s × button to choose readings. No manual refresh or Run command is needed. The vehicle clock starts when you enter a workspace; ignition and engine/READY remain separate controls.
+
+The accelerator and brake remain visible above the diagnostic tools. Hold a pedal face or use its pressure slider; release it to release the pedal. W / Up Arrow and S / Down Arrow also operate them outside text entry. RPM, speed and the appropriate module readings respond to the actual vehicle model. Use the ignition/start controls, select a suitable gear and release the parking brake as in Drive. The gauges, readings and pedals stay visible together.
+
+WLTC is a shared driving task, shown above both workspaces. Switching to Diagnostics keeps the cycle running. The top toolbar shows current speed and a rolling 120-second graph: blue actual speed and amber dashed WLTC target. Press a manual pedal or choose Drive manually to stop WLTC and take control. The vehicle clock keeps running.
+
+Fault codes applies to the selected module. Vehicle scan lists all fitted modules and is explicitly separate. Every fitted module uses the same Numbers/Graphs and add-parameter layout. The engine ECU supplies OBD replies; other modules supply their own labelled sampled simulation measurements. The charging interface remains reference-only and has no live measurements.
+
+CONNECT TO ONE UNIT; DISCOVER ALL UNITS
+
+Connect to Engine ECU (or the named module) opens that unit’s live parameters and reads its own fault memory. The button identifies the target and changes to Connected to <unit> after connection. Reading that unit’s fault codes does not query other modules.
+
+Vehicle scan is a separate discovery view. Choose the transport and Scan all control units to inspect the fitted units. No individual unit connection is required. Discovery leaves your current unit connection unchanged. Use Connect on a result to open that unit’s live data and faults.
+
+Live values repeat automatically while connected. Refresh selects 0.25 s, 1 s or 1 min of simulation time. In Custom diagnostic request, Read starts repeated numeric parameter reads at the displayed interval. Identification and service commands execute individually, so clearing codes or changing a session cannot repeat unintentionally.
+
+START LOCALLY
+
+Your Google Drive OBD folder needs only two files: run.sh and START_HERE.txt. The launcher embeds the application, editable source, original vehicle model, WLTC trace and reference documents. No separate backup folder or source ZIP is needed to run it.
+
+Install Python 3.10 or newer. In the downloaded folder, run python3 --version, then bash run.sh. Open http://127.0.0.1:8765 if the browser does not open automatically. No additional Python packages are required, and the simulator works offline.
+
+Keep the terminal open. Ctrl+C stops the server and removes temporary working files. Export any run you want to keep before resetting or stopping: session data is held in memory. If port 8765 is occupied, use bash run.sh --port 8766 --no-browser and open the printed address.
+
+STEP 1: VEHICLE · STEP 2: CHOOSE WORKSPACE
+
+The app opens at step 1, Vehicle. Choose a base vehicle, then open Customize vehicle & test conditions to adjust transmission, driven wheels, mass, tires/road load, ABS/ESP, cabin equipment, driving task and environment. Your selections remain a draft until Continue. Continue creates the selected parked vehicle and opens step 2, Choose workspace. Nothing starts driving automatically.
+
+At step 2 choose Drive for the cockpit, pedals, gears and WLTC controls, or Diagnostics & service for the scan tool, fault tests, vehicle units, signals, wiring and locations. The active application has these two workspace choices. You can switch between them without replacing the vehicle, resetting time, clearing faults or losing the recorded log. Held manual controls release when leaving Drive.
+
+Inside Diagnostics & service, Diagnostics contains Scan tool and Guided faults. Vehicle units contains Unit map, Signals, Wiring & connectors and Locations. Vehicle configuration shows the fitted vehicle; Edit vehicle opens the same global configuration flow. There is one configuration for the whole session.
+
+Use Change vehicle to edit a running session. It pauses the simulation and releases manual controls while you prepare a draft. Cancel returns to the previous workspace with the same vehicle, time, faults and log, and resumes the clock. Apply vehicle & return explicitly starts a new parked, ignition-off session, clears the previous run and faults, and disconnects the scan tool. Export wanted data before applying.
+
+Back from Choose workspace returns to the vehicle choices. Continuing with an unchanged committed configuration keeps the same vehicle. If validation or application fails, the editor keeps your draft and displays the error; correct it before continuing.
+
+Six base vehicles are available: Petrol basic, Petrol extended, Diesel, HEV, PHEV and BEV. Petrol/diesel can use a six-speed automatic or a six-speed manual with clutch. HEV/PHEV use the hybrid power-split model; BEV uses single-speed reduction. ESP requires ABS. Engine sensor detail and cylinder choices apply only to vehicles with an engine.
+
+FWD, RWD or AWD changes the driven wheels. Mass, wheel rolling radius, drag area and rolling resistance affect motion and engine speed. Cabin heater/ventilation and A/C are separately configurable. ICE cabin heating uses coolant; the hybrid/electric presets use electric heating. Outside temperature initializes cabin and engine coolant temperature. These are declared generic model choices, not a complete catalog of production chassis or HVAC architectures.
+
+Choose You drive for manual operation of the pedals, or WLTC Class 3b for the automatic virtual driver. A manual gearbox selects You drive because this version does not automate clutch/gear operation for WLTC. Dry, level road is the baseline; wet/snow/ice, slope and temperature are separate environment experiments.
+
+FIRST MANUAL DRIVE WITH AN AUTOMATIC GEARBOX
+
+1. At step 1 choose Petrol basic. Under Customize vehicle & test conditions choose 6-speed automatic and You drive. Press Continue, then choose Drive at step 2. The new car has ignition OFF, selector P and the parking brake applied.
+
+2. Switch ignition on. The powered dashboard and ECU become available, but the engine remains stopped. Press Start engine. Watch the short cranking state followed by idle RPM. The top VEHICLE LIVE label refers to simulation time; ENGINE RUNNING in the cluster refers to the engine.
+
+3. Hold S or Down Arrow to press the foot brake, then click D. Alternatively click Brake + select D: it temporarily applies the virtual brake for that gear change and restores your current pedal inputs afterward. The same helper exists for R. It does not bypass the stopped/direction interlocks.
+
+4. Release the parking brake. Hold W or Up Arrow for full accelerator pressure; hold S or Down Arrow for full foot-brake pressure. These keyboard inputs apply 100% while held and return to 0% when released. Hold an on-screen accelerator or brake pedal face for 35% pressure. The adjacent vertical 0–100% slider provides variable pressure; the live percentage and pedal depression show the same input. Releasing the pointer returns that pedal to zero. Brake is on the left and accelerator on the right; a manual vehicle adds the clutch at the far left.
+
+5. N disconnects propulsion and the vehicle coasts. Stop before Park, Reverse or a direction change. Stop engine leaves the ignition on. HEV/PHEV and BEV use Enable READY; a hybrid can be READY with zero engine RPM, and a BEV has motor power instead of an engine tachometer.
+
+Steer left with A or Left Arrow, and right with D or Right Arrow. Keyboard steering returns to center when released. C presses the clutch on a manual vehicle. The vehicle responds continuously while a workspace is open.
+
+Driving keys work in Drive and Diagnostics & service, outside text entry and Help, while you have manual control. They release when you switch windows, hide the browser tab, change workspaces or enter vehicle setup. Multiple held keys are tracked independently: S can remain held while you click a gear selector; if W and Up Arrow are both held, releasing one leaves the other active.
+
+Arrow keys keep their normal adjustment role when a slider is focused. Click the dashboard away from the slider before using arrow keys to drive. W/S and A/D provide the alternative driving controls.
+
+DASHBOARD WARNINGS AND ENGINE RED ZONE
+
+The dashboard uses a large red circled-P parking-brake indicator, plus red seat-belt and driver-door-open indicators. The lamps follow the same vehicle state as the controls and illuminate with ignition on. The new vehicle starts with the driver belted and the driver door closed.
+
+If D or R is selected but speed remains zero with accelerator pressure applied, check the parking-brake indicator and the parking-brake message. Release parking brake explicitly before accelerating. Selecting a gear and pressing the accelerator do not release it automatically. The warning gives a direct release action; it changes the same parking brake as the transmission control.
+
+Use the seat-belt and driver-door controls to unfasten/fasten the belt or open/close the driver door. The red warning clears when its cause is removed. These switches record BODY events only when their state changes; they do not create engine fault codes or add a propulsion interlock. They are warning demonstrations, not a complete occupant-restraint or door-mechanism model.
+
+Engine tachometers show a red band beginning at the selected vehicle's configured redline. Petrol and diesel use their own limits; changing the vehicle changes the band. The BEV instrument shows motor power and has no combustion-engine RPM red band.
+
+COMPACT LIVE DASHBOARD IN DIAGNOSTICS & SERVICE
+
+A compact live dashboard stays above the tools throughout Diagnostics & service: Scan tool, Guided faults, Unit map, Signals, Wiring & connectors, Locations and the fitted Vehicle configuration summary. Pedals, ignition/engine/READY state and warning lamps stay visible. RPM/speed instruments, selected gear, coolant, fuel or traction charge, 12 V readings and distance counters remain visible. A BEV shows motor power instead of engine RPM.
+
+Switch ignition on and start the engine or enable READY from this dashboard while the diagnostic tools stay open. Stop, Release parking brake, seat-belt and driver-door controls act on the same vehicle. The usual starter and vehicle-state interlocks still apply. The service dashboard also has momentary accelerator/brake pedals, a manual clutch when fitted, and assisted gear selection. W / Up Arrow, S / Down Arrow, A / D or Left / Right Arrow and C operate the same controls here. The full Drive workspace offers the larger instruments and cabin controls.
+
+This display shares the existing session and clock. It does not start a second simulation or polling loop. The clock continues while you change service tools, independently of the OBD connection. Disconnecting a sensor or applying an intermittent fault changes the shared controller state, and the compact dashboard updates from that state. Sampled fault effects still follow the sensor/controller timing. Opening Edit vehicle enters the separate global configuration flow and pauses the session as before.
+
+ODOMETER AND TRIP A
+
+ODO and TRIP A appear in the full and compact dashboards. Set an optional Starting odometer in Vehicle → Customize → Cabin & equipment; it defaults to zero. Actual distance traveled adds to both counters, including reverse. A stationary vehicle adds no mileage.
+
+Reset Trip A clears only that trip. It does not reset ODO, engine state, clock, faults or previous log samples, and works during WLTC. A new vehicle/session reset starts again from the configured starting reading; mileage is not saved between launcher sessions. Complete JSON and CSV contain initial_odometer_km, odometer_km and trip_distance_km.
+
+MANUAL CONTROLS WHILE DIAGNOSING
+
+The small physical pedals beside the service dashboard spring back to zero on release. Hold a pedal face for 35% accelerator/brake pressure, or move its vertical slider through 0–100%. A manual clutch applies 100% when its face is held. W / Up Arrow accelerates; S / Down Arrow brakes; C operates the manual clutch. You can press keys while switching service tools, but text fields, Help, setup and hidden windows do not drive the car. Re-press after changing between Drive and service.
+
+Choose a gear and press Brake + select (or Clutch + select); release the parking brake separately. Pedal pressure takes effect on the next automatic vehicle update. While WLTC drives, the pedals display the virtual driver’s input. Press a pedal to take manual control, or use Drive manually to stop WLTC and drive yourself.
+
+COMPACT DIAGNOSTIC TOOL
+
+The connection toolbar names the current vehicle and selected ECU. Live data shows the selected module’s main values automatically, with Numbers/Graphs and + Add parameter. Fault codes applies to the selected module; Vehicle scan lists all fitted units; Connector contains pin/signal references. Missing replies show unavailable values and graph gaps. Expand request/response details when you want CAN addresses and bytes. Messages and Events stay closed after a diagnostic request. Click their counter to open a compact trace, and Expand trace only when you need a larger inspection area.
+
+DIESEL SENSOR COVERAGE
+
+Diesel · common-rail defaults to the Extended set: 13 ECU channels. Basic exposes 9. Basic/Extended is model detail, not a Euro emissions class. Open Help → Diesel sensors and Euro 4–6 for exact roles, signal types, sample periods and missing aftertreatment models. Euro stages do not prescribe one universal lambda-sensor count.
+
+MANUAL GEARBOX AND CLUTCH
+
+The manual configuration starts in N and has R plus gears 1–6; it has no P or D. Hold C for a fully pressed clutch, then press Start engine. Clutch + start engine performs the temporary clutch press for a stopped Neutral start.
+
+To pull away, hold C and choose first gear, then release the parking brake. Hold the clutch slider near 100%; release C while keeping the slider held. Apply accelerator pressure and gradually drag the clutch toward 0%, then release the slider. W gives full accelerator pressure; the on-screen accelerator pedal face gives 35%, and its vertical slider provides finer control.
+
+The selected gear determines the ratio; the manual model does not shift automatically. Clutch + select gear is a temporary shifting aid, not an automatic smooth launch. Abruptly releasing the clutch under load can stall the engine. Stop, select N, press the clutch and restart. Reverse/direction changes require a stopped vehicle; an unsafe downshift that would over-speed the engine is rejected.
+
+CABIN HEATER AND A/C
+
+Cabin controls are in Drive. Turn climate on, choose a temperature and fan setting, and enable A/C when fitted. Cabin temperature responds gradually. A cold ICE engine initially has little useful cabin heat; output increases as the coolant warms. The electric heater can heat when the traction system is READY.
+
+A/C and blower loads affect ICE shaft demand/fuel use. Electric heating/cooling and the blower draw traction energy on the hybrid/electric models. Diagnostics & service → Vehicle units → Cabin heater / A/C exposes temperatures and loads. Opening its module connector removes climate operation and measurements while physical cabin temperature remains. Missing cabin-temperature input leaves ventilation available but disables automatic heating/cooling.
+
+WLTC: A REPEATABLE TARGET FOR THE SAME VEHICLE
+
+The vehicle configuration stage offers the official WLTC Class 3b speed target: 1,800 seconds, sampled at one-second intervals, with Low, Medium, High and Extra high phases. The peak target is 131.3 km/h. Its source is UN Regulation No. 154 Annex B1, reproduced in Australian ADR 111/00; source/version/checksum metadata is bundled with the trace.
+
+Continuing to Choose workspace does not start the cycle. In Drive press Start WLTC. The virtual driver performs the start/READY sequence, selects Drive and uses the ordinary accelerator and brakes to follow the target. Actual speed is calculated by the vehicle model and recorded separately. Weak power, low grip, slopes or faults can cause a tracking difference.
+
+The vehicle clock starts automatically in Drive or Diagnostics and controls the cycle, sensors, logs and scan-tool polling. Changing views or disconnecting OBD leaves the vehicle live. Press a pedal or choose Drive manually to stop WLTC and take control; gear selectors become available after takeover.
+
+Use dry, level conditions for the baseline. Surface grip and road slope are not parts of the official speed trace. This is a generic training vehicle following an official target; it is not a certified WLTP emissions, fuel-consumption or range test. Completion holds the vehicle with the brake and leaves the powertrain on until you take over or stop it.
+
+VEHICLE UNITS, SENSOR PURPOSES AND WIRING
+
+Drive and Diagnostics & service share one vehicle, clock and log. Open Diagnostics & service → Vehicle units for the functional map; select a unit to inspect its inputs. Purpose groups distinguish starting/engine timing, running control, braking/stability, energy/temperature, cabin comfort, and information/monitoring. A separate sensor-group filter covers air, fuel, timing, cooling and other functional areas.
+
+Importance labels describe implemented behavior. Crank input is needed for engine operation. MAF/MAP loss invokes a limited-torque fallback. Wheel/steering/yaw faults affect the fitted assistance. Fuel level is a derived information channel with no independent sender connector or modeled fuel-starvation fault. An input’s loss explanation states exactly what this simulator does.
+
+Open full wiring schematic shows one central controller housing, with its connector banks inside and the fitted wired sensors around it. Whole unit and Focus connector keep the same controller identity. Follow component → connector → pin → wire to its endpoint and signal. Each supported sensor card shows Connected or Unplugged, the current controller-input value/validity, and a visible Disconnect/Reconnect button. The fault summary remains visible while you follow the connections.
+
+The Engine response card is read-only: it shows actual combustion state, physical shaft RPM, mean shaft torque and fuel flow. Separate injector or ignition-actuator circuits and their pin faults are not modeled in this release.
+
+Read pin role, protocol use, paired connection and signal example. The DLC drawing is the vehicle socket mating face, wide edge at the top, pins 1–8 above 9–16. CAN-H and CAN-L are pins 6 and 14, grounds are 4/5 and supply is 16. Its Open CAN branch/Reconnect CAN button affects tester communication. CAN is the communication layer; OBD/UDS are diagnostic services accessed through this socket.
+
+Physical state and sampled measurements remain distinct. Tables show validity, sample period and age. An invalid/unavailable value is not a valid zero. Opening a connector changes the relevant measurements and model behavior; after repair a fresh sample may be needed. Stored fault memory is separate from the repair.
+
+To try a visible fault, click Disconnect in the Crankshaft speed card. Its label changes to Unplugged. After sampling, the controller input becomes unavailable, combustion is inhibited and the teaching P0335 fault is reported according to its pending/stored state. The fault summary shows the connection, input validity, combustion/start state, physical shaft RPM and fault consequence together.
+
+VEHICLE LIVE means that time is advancing; a disconnected sensor does not pause the simulation. The engine can be stopped or start-inhibited while physical shaft RPM coasts down and the moving vehicle continues to coast. Click Reconnect in the same sensor card and allow another sample to recover the input. Restarting the engine and clearing stored memory are separate actions.
+
+For a fault overview, open Diagnostics & service → Diagnostics → Scan tool → Vehicle scan with ignition on, then choose Scan all control units. This is an explicit scan, not a background scan of every module. The engine result uses OBD replies; other units are labelled simulation-state inspection. Reconnect the sensor, allow a fresh sample, and restart the engine if it stopped. Clear retained fault memory separately when checking the repair.
+
+The coolant divider has an electrical circuit model. Most additional sensor transfers, pulse previews and CAN waveforms are labelled teaching examples, not captured electrical traces. ECU/sensor connector assignments and 3D locations are illustrative. Locations links the same objects to the cutaway vehicle; it is not a driving-game world or OEM service-geometry model.
+
+SENSOR CHARACTERISTICS AND TIMING GROUPS
+
+In Unit map, Group by offers Purpose, Sensor system, Signal type and Sample rate. In Wiring & connectors, Arrangement offers Functional group, Signal type and Sample rate around the same central controller. These choices reorganize the view; the original connector banks, pin identities and simulation timing remain the same.
+
+Inputs are identified as analogue, digital on/off, pulse, discrete state or derived/calculated. Expand Characteristics for the declared measurement range, electrical transfer or pulse conversion, sampling period and limits. Calculated channels such as battery SOC and fuel level do not have an independent sensor connector. BMU covers the implemented pack-voltage, pack-current and pack-temperature sensors plus calculated SOC; individual cell wiring and balancing circuits are not implemented.
+
+Sampling groups: 10 ms = 100 samples/s; 20 ms = 50 samples/s; 50 ms = 20 samples/s; 100 ms = 10 samples/s; 500 ms = 2 samples/s; 1,000 ms = 1 sample/s. The live pulse frequency is different: the selected 60-pulses/revolution crank model produces 850 Hz at 850 rpm, while its input is sampled every 20 ms. CAN bitrate is bits/second; it is not a sensor sampling rate or a message publication period. Recording and scan requests have their own intervals.
+
+LIVE AND INTERMITTENT SENSOR FAULTS
+
+Disconnect/Reconnect in a sensor map row or schematic card changes the running vehicle's connection. For an intermittent fault, select that sensor in Wiring & connectors and use Start intermittent. Connected seconds and Dropout seconds default to 3 and 1. Regular repeats these phases. Irregular varies the phase lengths reproducibly by about +/-25%, resolved to the 2 ms plant step. The countdown, dropout count, sample validity and consequences all follow the same simulation clock. The test advances automatically while a workspace is open.
+
+Try a running petrol car's MAF input first: leave the engine idling, open the ECU wiring, select MAF, then start a regular test. During each open phase the measurement becomes invalid at its next sample and the controller uses its limited-torque fallback. A sufficiently long dropout produces pending and then stored P0102. The input and controller can recover in a connected phase while the stored code remains. Crankshaft loss inhibits engine operation instead; reconnecting and restarting are separate actions where a restart is needed.
+
+Brief interruptions may be missed by the input sampling or end before the teaching diagnostic delay confirms a fault. This is expected. Every contact transition is recorded in Events with simulation time. A one-minute saved-log interval can miss short dropouts in graphs; use a shorter interval and export complete run JSON to retain the event history.
+
+Stop & reconnect cancels the schedule and restores the connection. A direct Disconnect/Reconnect also cancels that sensor's schedule. Clearing diagnostic memory does not stop an active intermittent test; the fault may return. Sensors on BMU/ABS and other units use their declared simulation-state fault records rather than invented engine P-codes. These are generic intermittent-contact exercises, not a full vibration, corrosion or electrical-noise model.
+
+CONNECT, REQUEST, INSPECT AND REPAIR
+
+For engine diagnostics use a petrol, diesel or hybrid vehicle. Open Diagnostics & service and switch ignition on in the compact live dashboard if the vehicle is off. This powers the units for communication without starting the engine. For a running-engine test, use Start engine or Enable READY in the same dashboard; the diagnostic tool stays open. Open Diagnostics → Scan tool, choose the matching 11-bit CAN bitrate (250 or 500 kbit/s) and Engine ECU, then Connect. The adapter is virtual. Changing the protocol/target requires applying the connection. The full Drive workspace remains available for pedals, steering and gear selection.
+
+Live parameters update automatically. For an individual service, expand Custom diagnostic request, choose a named request/PID, then Read. Engine speed is service 0x01 and PID 0x0C: decimal 1 and 12. The request bytes are 01 0C. As a worked example, application reply 41 0C 0D 48 has data bytes A=0x0D=13 and B=0x48=72; (256×13+72)/4 gives 850 rpm. Message inspection distinguishes CAN address, transport framing, service and parameter/data bytes, with hexadecimal and decimal values.
+
+The engine ECU runs the documented OBD services: current data 01, stored codes 03, clear 04, pending codes 07 and VIN request 09 02, plus the selected UDS session/identification/tester-present examples. The supported service list identifies individual PIDs and units. A health scan records actual engine OBD responses; other modules are explicitly labelled simulation-state inspection without invented OEM addresses. BEV has no combustion-engine OBD endpoint.
+
+Wrong bitrate, ignition off, an unplugged tester CAN branch or an open unit connector produces an explicit unavailable/no-reply reason. K-line, J1850, 29-bit CAN and DoIP entries are references in this release. Choosing a reference does not run that transport.
+
+For an end-to-end fault: connect the engine scan tool, open Guided faults → Coolant sensor circuit, disconnect and sample 0.6 seconds. Inspect the high input, invalid measurement, fallback and P0118. Reconnect and sample; confirm the measured value returns. Clear retained emissions memory separately, then read again. The freeze-frame pane is model confirmation memory, not a complete implementation of OBD Mode 02.
+
+CLOCK, RECORDING AND EXPORTS
+
+The vehicle clock starts automatically when you enter Drive or Diagnostics. Ignition, engine/READY and the OBD connection are separate controls. Use Time scale to change the model clock rate. Keys 1 and 2 switch Drive and Diagnostics; driving controls are suppressed while typing or in Help. Change vehicle pauses the editor; apply or cancel resumes the workspace.
+
+Log every 0.1 s, 1 s or 1 min selects saved-sample spacing in simulation time. It does not change sensor/controller sampling periods. Scan-tool continuous reads have their own 0.25 s/1 s/1 min request interval. Both follow the continuously updating vehicle clock.
+
+Export → Recorded signals as CSV preserves values, units and validity with configuration and gear. JSON exports contain state and traces; the workspace report also keeps recorded samples and view/selection. Export before Apply vehicle & return, Reset or shutdown. Frontend history is bounded to 9,000 samples, interval recording to 20,000 samples, and diagnostic rows to 1,000; export periodically for long experiments.
+
+SCOPE AND VERIFICATION
+
+This is a local browser application served by Python, not a native desktop installer. No Electron, Node or Rust installation is needed to run the download. Teaching models simplify engine/gearbox behavior, longitudinal tire forces, yaw assistance, hybrid power flow and cabin heat transfer. Manual clutch, HVAC and chassis settings are functional, but detailed suspension, clutch temperature, refrigerant dynamics, full body electronics, airbag deployment and external charging are not simulated.
+
+CAN/ISO-TP frames are generated diagnostic transcripts. Physical arbitration, bit stuffing, propagation and electrical bus errors are not simulated. There is no real-adapter connection, OEM flash/coding/security access, MCD/ODX importer, CARLA integration or CAN reverse-engineering pipeline in this download.
+
+Automated verification uses model tests, real loopback API checks, parsed-node UI interactions and CPU Canvas/SVG checks where applicable. Those methods do not establish native browser event/layout, WebGL GPU or Linux Mint compatibility on your particular machine. Use the local checks below. The included older PDF books remain theory references with earlier UI screenshots; this guide describes version 0.9.7.
+
+Completed automated results for this release are recorded in docs/VALIDATION_0_9_3.txt. The local checklist below is for observations on your own computer.
+
+LOCAL ACCEPTANCE CHECKLIST — 45 CHECKS
+
+Date: __________ OS/version: __________ Browser/version: __________
+Python: __________ Display scale: __________ Renderer badge: __________
+
+Record your observed results; this is a checklist, not a claim that your machine has passed.
+
+01. Launch, version and first step
+Run bash run.sh from the downloaded folder. Expect version 0.9.7 and step 1, Vehicle, with no operational mode tabs, simulation controls or automatic engine start. Check the page works without internet.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+02. Vehicle draft and Continue
+Change transmission, equipment and environment without continuing: the prepared vehicle must not change. Press Continue once. Expect step 2, Choose workspace, with the chosen hardware summary and a parked, ignition-off vehicle. Neither choice should start driving automatically.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+03. Choose either workspace
+Choose Diagnostics & service directly, then Drive. Both use the vehicle from step 1. Check the active navigation has only Drive and Diagnostics & service. Unit map, Signals, Wiring & connectors and Locations belong inside service.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+04. Switch without resetting
+Create a short run, record data and disconnect a sensor. Switch Drive → Diagnostics & service → Drive. Time, vehicle, selected object, fault connection and log must persist; a running clock continues. Held manual pedals release on leaving Drive.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+05. Change vehicle and Cancel
+While running, choose Change vehicle. Expect the run to pause and manual controls to release. Edit the draft, then Cancel. The old vehicle, simulation time, faults and log must remain, and the clock resumes.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+06. Apply a replacement deliberately
+Export a run you want to keep, then use Change vehicle or service Vehicle configuration → Edit vehicle. Choose different hardware and Apply vehicle & return. Expect one new parked, ignition-off run with the chosen hardware, cleared log/faults and disconnected scan tool, back in the prior workspace.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+07. Back, validation and startup gating
+Before entering an activity, go Back from Choose workspace and Continue without changing anything: the same committed vehicle should remain. Try an invalid mass and correct it; the error must keep the draft visible. On a fresh launch, keys 1, 2, Space and period must not enter or run an activity before the two setup stages are complete.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+08. Ignition versus clock
+Choose automatic petrol and You drive. Switch ignition on: VEHICLE LIVE may appear while engine RPM remains zero. Engine start is still a separate action.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+09. Start during live updates
+Press Start engine while the simulation runs. Expect cranking followed by idle RPM; background sampling should not keep Start or the selector disabled.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+10. Game controls and spring return
+Hold/release W and S, then Up/Down Arrow, and check 100% pressure while held and 0% on release. Hold W plus Up Arrow and release one: the remaining key should keep accelerating. Check A/D and Left/Right Arrow steering and release-to-center. Hold a pedal face, then drag/release its vertical 0–100% slider; percentage, face depression and released state should agree. Pointer cancellation, switching windows, hiding the tab and leaving Drive should release manual inputs. Typing and Help must not drive the car; focused slider arrows must adjust that slider.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+11. One-pointer gear selection
+With a stopped automatic car, use Brake + select D. D should be accepted without a permanent brake latch. Also hold S while clicking ordinary D/R; moving direction changes remain blocked.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+12. Automatic drive and Neutral
+Release parking brake, hold W and watch speed/RPM/gear. Release W and select N to coast; brake before Reverse/Park. Gear selection must not set an arbitrary vehicle speed.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+13. Manual start and launch
+Apply manual petrol with You drive. Check N/R/1–6 and C/clutch controls. Start with C or Clutch + start engine; use first gear and a progressive clutch release with accelerator.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+14. Manual stall and restart
+While stopped in gear, release clutch against the brake with no throttle. Expect a stalled state; recover in Neutral with clutch pressed and a new Start. There should be no automatic gear shift.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+15. Fitted hardware and chassis
+Compare ICE, HEV and BEV inventories, with ABS/ESP fitted or omitted. Apply different mass/driven wheels/tire radius and compare repeatable motion; absent measurements must be unavailable, not fabricated zeros.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+16. Cold heater and electric heat
+With a cold ICE and heat requested, expect a warm-coolant wait. Under warm conditions heat should raise cabin temperature gradually. On BEV, READY plus electric heat should use traction energy without fuel or engine RPM.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+17. A/C and cabin fault
+At a warm ambient temperature, enable A/C and observe cooling/load. Open unit_hvac: active load should stop and cabin measurements become unavailable while cabin temperature remains physical. Reconnect and sample.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+18. WLTC preparation
+Choose WLTC with a compatible automatic transmission and dry, level conditions. Apply alone must not start it. Selecting manual transmission should select manual driving instead.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+19. WLTC target and actual
+Press Start WLTC. Expect start/READY preparation followed by target, actual speed, phase and cycle time. Actual speed may differ from target; the displayed trace must not replace physical motion.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+20. Continuous vehicle and takeover
+Start WLTC from a stopped vehicle, switch between Drive and Diagnostics, then choose Drive manually. The virtual driver releases its inputs and the vehicle clock keeps advancing. Press a pedal and verify the car responds without a Run command.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+21. Sensor purpose groups
+Select Engine ECU: starting-related inputs appear first. Filter Purpose and Sensor group; check crank importance and MAF fallback. In Instrument cluster, fuel level should be information with no invented unplug action.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+22. Samples and validity
+Open a sampled sensor, note period/age and unplug it. The reported reading should show missing/invalid while its physical quantity may remain. A lost wheel measurement must not freeze physical wheel rotation.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+23. Wiring and pins
+Open the ECU wiring schematic: expect one central controller with connector banks inside and fitted wired sensors around it. Select a wire without losing the controller context. Disconnect Crankshaft speed in its card, advance time and check the visible connection/input/engine/fault summary; reconnect and sample again. Read role/pair/protocol and CAN-H/CAN-L labels; distinguish live state from explanatory signal examples and the read-only Engine response card.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+24. Connect and named requests
+With engine-vehicle ignition on, match the CAN bitrate and Connect to Engine ECU. Choose Engine speed from the named requests. Compare its decoded value with the sampled crank input.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+25. Hexadecimal and decimal bytes
+Inspect a request/reply. Check service 0x01 = 1 and engine-speed PID 0x0C = 12, byte roles and RPM formula. CAN address, transport framing and application bytes should remain distinct.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+26. Unavailable diagnostics
+Apply a mismatched bitrate or turn ignition off, then request data. Expect the relevant no-reply reason. Legacy reference transports must not claim runnable traffic; BEV must not invent an engine ECU.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+27. Fault, repair and retained memory
+Run the coolant guided fault through disconnect, sample, reconnect, sample and clear. Verify P0118 and invalid high input, measurement recovery, and the separate clear operation. Try crank loss or MAF fallback as additional cases.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+28. DLC and battery network faults
+Open the tester DLC branch: scan replies stop while vehicle control continues. On an electric/hybrid configuration, BMU disconnect can latch shutdown; follow its stopped ignition/READY restart procedure after repair.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+29. Recording and exports
+Try saved intervals 0.1 s, 1 s and 1 min plus continuous scan requests. Disconnect the scan tool and verify the vehicle keeps responding to pedals. Export CSV/JSON/transcript and inspect units, validity, configuration, gears and recorded data.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+30. Window and location view
+Resize the browser and test your usual display scaling. Check controls, filters and long pin explanations. In Locations, select/rotate/zoom/cutaway and confirm wheel animation follows the current physical vehicle state.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+31. Clean shutdown and relaunch
+Export wanted data, then press Ctrl+C in the terminal. The local server should stop and temporary working files be removed. Relaunch the same run.sh; the OBD download folder still needs only run.sh and START_HERE.txt.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+32. Sensor type, characteristics and sample-rate grouping
+Open an ECU and a hybrid/electric BMU. Change Group by in Unit map and Arrangement in the schematic. Verify analogue/digital/pulse/discrete/calculated distinctions, range/transfer details and exact sampling groups. Change RPM: pulse frequency should change while the sampling group remains fixed. Calculated SOC has no unplug button.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+33. Intermittent contact, recovery and retained faults
+With a petrol engine running, select MAF in the schematic and start a regular 3-second connected / 1-second dropout test. Watch contact state, invalid input, controller fallback and retained P0102 after recovery. Repeat with Irregular. Try a shorter dropout and observe whether sampling/diagnostic confirmation catches it; no code is guaranteed for a brief interruption.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+34. Stop and log an intermittent test
+Start an intermittent test and switch tools: countdown, samples and event timestamps keep advancing. Stop & reconnect cancels it; after another cycle-length wait it stays connected. Stored memory remains until cleared. Inspect transition events and export the complete run JSON; a coarse saved-log interval can miss short signal gaps.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+35. Parking-brake warning and a held launch
+With an automatic petrol vehicle running, select D while the parking brake remains applied. Hold accelerator pressure and check zero speed, a clear red circled-P lamp and the parking-brake message. Release the parking brake explicitly; the lamp/message should clear and held accelerator pressure should produce motion. Check that selecting D alone never silently releases the parking brake.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+36. Driver seat-belt state and warning
+With ignition on, unfasten the driver seat belt. Check the red seat-belt symbol in the full and compact dashboards. Fasten it again and check that the warning clears. Inspect the BODY events: repeated identical state should not create duplicate changes. This teaching switch must not create an engine fault code or stop propulsion.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+37. Driver-door state and warning
+With ignition on, open the driver door and check the red door-open symbol in the full and compact dashboards. Close it and check that the warning clears. Switch ignition off: the body and parking warning lamps should be unlit while the underlying door/belt/brake states remain. A newly applied vehicle should start belted with the door closed.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+38. Configured RPM red zone
+Compare a petrol and a diesel vehicle. Check a visible red band beginning at each configured engine redline on both engine tachometers; the diesel band should begin at its lower configured limit. Apply BEV: its left instrument should show motor power, with no engine RPM red-zone band.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+39. Start and monitor from Diagnostics & service
+Choose Diagnostics & service directly after vehicle setup. Check the compact dashboard remains visible above Scan tool, Unit map, Wiring & connectors and the Vehicle configuration summary. Use its ignition and Start engine or Enable READY controls without leaving the diagnostic tool. Expect cranking then idle RPM or electric READY. Stop from the same dashboard. Use full Drive only when you need its larger driving controls.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+40. One vehicle and clock while diagnosing
+Start a petrol engine from the compact dashboard. While it stays visible, disconnect Crankshaft speed or run an intermittent MAF test in Wiring & connectors. Check that the displayed engine state/warnings follow the same fault and sampling delays as the tool. Change service tools while time and the intermittent countdown advance; the same vehicle, fault, clock and log should continue without a second simulation.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+41. Odometer, trip and configured starting mileage
+Set a starting odometer, drive forward and reverse and compare ODO/Trip A in Drive and service. Parked/paused time must add no distance. Reset Trip A: only the trip returns to zero. Reset the session: ODO returns to its configured starting reading.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+42. Manual pedals while diagnosing
+Start from the service dashboard, select D using Brake + select and release the parking brake. Hold W / Up Arrow or the small accelerator and watch speed/RPM and live diagnostic values change. Release: pressure returns to zero. Brake with S / Down Arrow. Change service tools while holding a key; typing in fields, Help, blur and setup must release or suppress driving inputs.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+43. WLTC input ownership and takeover
+During WLTC, service pedals show the virtual driver input. Press a pedal or W/S to take manual control; the clock keeps updating. Release the input and check that no throttle or brake remains held. The explicit Drive manually button stops the cycle and keeps the vehicle clock live.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+44. Compact diagnostic tabs and opt-in trace
+Use Live data, selected-module Fault codes, whole-vehicle Vehicle scan and Connector. A read request should not open Messages automatically. Open Messages/Events manually; verify the default trace is compact, Expand trace overlays the lower tools, and closing it restores tool space.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+45. Committed vehicle identity and diesel detail
+Apply basic petrol after using PHEV. Check the vehicle name, dashboard, configured unit labels and fitted hardware agree with petrol. Apply Diesel · common-rail and confirm Extended engine sensors in setup. Review the diesel sensor guide: no Euro compliance or universal sensor count is claimed.
+[ ] PASS  [ ] FAIL  [ ] SKIP  Notes: __________________________
+
+REFERENCES
+
+WLTC source: https://www.legislation.gov.au/F2024L00446/asmade/2024-04-15/text/original/epub/OEBPS/document_1/document_1.html
+Bosch sensor roles: https://www.bosch-mobility.com/en/solutions/sensors/overview-powertrain-sensors/
+ISO-TP concepts: https://docs.kernel.org/networking/iso15765-2.html
+
+Model constants and exact behavior are declared by the packaged source and tests. Earlier PDF screenshots are not the current navigation guide.
