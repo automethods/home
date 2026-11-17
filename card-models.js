@@ -2,13 +2,13 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { t } from './i18n.js?v=0.5.16';
+import { t } from './i18n.js?v=0.5.16.1';
 import { addBusLights } from './bus-lights.js';
 
 const loader = new GLTFLoader();
 const assets = new Map();
 function getModel(file) {
-  const revision = file === 'commercial-fleet' ? '?v=0.2.2' : '';
+  const revision = file === 'commercial-fleet' ? '?v=0.2.2' : file === 'obd-diagnostics' ? '?v=0.5.16.1' : '';
   if (!assets.has(file)) assets.set(file, loader.loadAsync(`models/${file}.glb${revision}`).then(gltf => {
     return gltf.scene;
   }).catch(error => { assets.delete(file); throw error; }));
@@ -80,9 +80,9 @@ async function createView(viewport) {
     const radius = bounds.getBoundingSphere(new THREE.Sphere()).radius;
     const vertical = THREE.MathUtils.degToRad(camera.fov / 2);
     const angle = Math.min(vertical, Math.atan(Math.tan(vertical) * camera.aspect));
-    const distance = radius / Math.sin(angle) * 0.78;
+    const distance = radius / Math.sin(angle) * (key === 'obd' ? 0.95 : 0.78);
     controls.target.copy(center);
-    camera.position.copy(center).add(new THREE.Vector3(1.1, 0.65, ['vehicle', 'obd'].includes(viewport.dataset.scene) ? -1.4 : 1.4).normalize().multiplyScalar(distance));
+    camera.position.copy(center).add(new THREE.Vector3(1.1, 0.65, key === 'vehicle' ? -1.4 : 1.4).normalize().multiplyScalar(distance));
     controls.minDistance = distance * 0.5;
     controls.maxDistance = distance * 2;
     controls.update();

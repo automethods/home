@@ -154,7 +154,7 @@ const messages = {
     "obdAvailability": "Online lab",
     "modelObd": "Teaching vehicle and enlarged electronic control unit",
     "loadingObd": "Loading vehicle and ECU…",
-    "obdIntro": "Explore vehicle control, sensor signals, diagnostic trouble codes and OBD requests in a shared virtual vehicle.",
+    "obdIntro": "Drive a virtual vehicle, inspect live sensor data, introduce faults and practise OBD diagnostics in your browser.",
     "obdDetail": "Choose petrol, diesel, hybrid or electric vehicles. Drive, inspect live values, inject connector faults and follow CAN / ISO-TP requests. Run the complete simulator directly in your browser.",
     "obdOpen": "Open OBD II Lab"
   },
@@ -313,7 +313,7 @@ const messages = {
     "obdAvailability": "Онлайн-лабораторія",
     "modelObd": "Навчальний автомобіль і збільшений електронний блок керування",
     "loadingObd": "Завантаження автомобіля й ЕБК…",
-    "obdIntro": "Досліджуйте керування автомобілем, сигнали датчиків, коди несправностей і запити OBD на спільній віртуальній моделі.",
+    "obdIntro": "Керуйте віртуальним автомобілем, переглядайте сигнали датчиків, створюйте несправності та практикуйте OBD-діагностику у браузері.",
     "obdDetail": "Обирайте бензиновий, дизельний, гібридний або електричний автомобіль. Керуйте ним, переглядайте поточні дані, створюйте обриви з’єднань і простежуйте запити CAN / ISO-TP. Повний симулятор працює безпосередньо у браузері.",
     "obdOpen": "Відкрити OBD II Lab"
   }

@@ -58,8 +58,12 @@
     ]
   },
   "obd-diagnostics": {
-    "source": "upload-batches/Home-v0.5.15/source-tools/build-obd-preview.py (original OBD II Lab vehicle and authored ECU cutaway)",
-    "bytes": 147152,
-    "purpose": "Homepage visual illustration; ECU enlarged, no OEM geometry"
+    "source": "Vehicle Pack/Car 24/Car 24.obj + authored enlarged ECU cutaway",
+    "source_sha256": "8b9e4c8710dd9ac7bd30ddf584c26683064a2acaa7f0df2bf321fb01fa518a5d",
+    "bytes": 1978732,
+    "purpose": "Homepage illustration; vehicle geometry is decorative and separate from the simulator model",
+    "vehicle_triangles": 3296,
+    "source_used_elsewhere_on_homepage": false,
+    "authoring_script": "upload-batches/Home-v0.5.16/source-tools/build-obd-library-preview.mjs"
   }
 }
