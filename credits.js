@@ -1,5 +1,5 @@
 import './i18n.js?v=0.5.19';
-import views from './assets/credits/views.js?v=0.5.20';
+import views from './assets/credits/views.js?v=0.5.21';
 
 function render() {
   const view = views[document.documentElement.lang] || views.uk;
