@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { t } from './i18n.js?v=0.5.16.1';
+import { t } from './i18n.js?v=0.5.17.1';
 import { addBusLights } from './bus-lights.js';
 
 const loader = new GLTFLoader();
@@ -80,9 +80,12 @@ async function createView(viewport) {
     const radius = bounds.getBoundingSphere(new THREE.Sphere()).radius;
     const vertical = THREE.MathUtils.degToRad(camera.fov / 2);
     const angle = Math.min(vertical, Math.atan(Math.tan(vertical) * camera.aspect));
-    const distance = radius / Math.sin(angle) * (key === 'obd' ? 0.95 : 0.78);
+    const framing = { obd: 0.95, vehicleSim: 1.06 };
+    const distance = radius / Math.sin(angle) * (framing[key] ?? 0.78);
     controls.target.copy(center);
-    camera.position.copy(center).add(new THREE.Vector3(1.1, 0.65, key === 'vehicle' ? -1.4 : 1.4).normalize().multiplyScalar(distance));
+    const direction = key === 'vehicleSim' ? new THREE.Vector3(1.1, 1.03, -1.4)
+      : new THREE.Vector3(1.1, 0.65, key === 'vehicle' ? -1.4 : 1.4);
+    camera.position.copy(center).add(direction.normalize().multiplyScalar(distance));
     controls.minDistance = distance * 0.5;
     controls.maxDistance = distance * 2;
     controls.update();
@@ -148,7 +151,8 @@ async function createView(viewport) {
     });
     viewport.dataset.vehicleCount = String(vehicles.length);
   } else {
-    const files = { vehicle: 'sports-car-rich', powertrain: 'chassis', gearbox: 'gearbox', commercial: 'commercial-fleet', obd: 'obd-diagnostics' };
+    const files = { vehicle: 'sports-car-rich', powertrain: 'chassis', gearbox: 'gearbox', commercial: 'commercial-fleet',
+      obd: 'obd-diagnostics', vehicleSim: 'vehicle-test-cell' };
     model = normalize(await getModel(files[key]), 4);
   }
   if (key === 'commercial') {
@@ -183,7 +187,7 @@ async function createView(viewport) {
   translate();
 }
 
-for (const viewport of document.querySelectorAll('.card-model')) {
+function mountView(viewport) {
   createView(viewport).catch(error => {
     const showError = () => { viewport.querySelector('.model-status').textContent = t('unavailable'); };
     showError();
@@ -191,4 +195,17 @@ for (const viewport of document.querySelectorAll('.card-model')) {
     viewport.setAttribute('aria-busy', 'false');
     console.error('Card model unavailable:', error);
   });
+}
+
+const testCell = document.querySelector('.card-model[data-scene="vehicleSim"]');
+for (const viewport of document.querySelectorAll('.card-model')) {
+  if (viewport !== testCell) mountView(viewport);
+}
+if (testCell) {
+  const nearViewport = new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting) return;
+    nearViewport.disconnect();
+    mountView(testCell);
+  }, { rootMargin: '160px' });
+  nearViewport.observe(testCell);
 }

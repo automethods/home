@@ -23,14 +23,18 @@ def verified_files(archive, release, label):
                 raise ValueError(f'{label} checksum mismatch: {relative}')
             files[relative] = content
     if 'publicationFiles' in release:
-        missing = set(release['publicationFiles']) - files.keys()
+        paths = release['publicationFiles']
+        if isinstance(paths, list):
+            paths = {name: name for name in paths}
+        missing = set(paths.values()) - files.keys()
         if missing:
             raise ValueError(f'{label} publication files missing: {sorted(missing)}')
-        files = {name: files[name] for name in release['publicationFiles']}
+        files = {target: files[source] for target, source in paths.items()}
     return files
 
 
-def assemble(root, manifest, archive, mechanics_archive=None, tea_archive=None, engine_archive=None, cea_archive=None, obd_archive=None):
+def assemble(root, manifest, archive, mechanics_archive=None, tea_archive=None, engine_archive=None,
+             cea_archive=None, obd_archive=None, vehicle_sim_archive=None):
     release = manifest['automobile']
     files = {name: content for name, content in verified_files(archive, release, 'Automobile').items()
              if not is_research_document(name)}
@@ -39,7 +43,8 @@ def assemble(root, manifest, archive, mechanics_archive=None, tea_archive=None, 
     for slug, label, project_archive in [
             ('mechanics', 'Machine Elements', mechanics_archive),
             ('tea', 'TEA', tea_archive), ('engine', 'ICE', engine_archive),
-            ('cea', 'CEA', cea_archive), ('obd-2', 'OBD II Lab', obd_archive)]:
+            ('cea', 'CEA', cea_archive), ('obd-2', 'OBD II Lab', obd_archive),
+            ('vehicle-sim', 'Vehicle Testing on a Roller Dynamometer', vehicle_sim_archive)]:
         if slug not in manifest:
             continue
         if project_archive is None:
@@ -82,7 +87,8 @@ def main():
     engine = download_release(manifest['engine']) if 'engine' in manifest else None
     cea = download_release(manifest['cea']) if 'cea' in manifest else None
     obd = download_release(manifest['obd-2']) if 'obd-2' in manifest else None
-    assemble(root, manifest, archive, mechanics, tea, engine, cea, obd)
+    vehicle_sim = download_release(manifest['vehicle-sim']) if 'vehicle-sim' in manifest else None
+    assemble(root, manifest, archive, mechanics, tea, engine, cea, obd, vehicle_sim)
 
 
 if __name__ == '__main__':

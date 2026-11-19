@@ -377,7 +377,7 @@ async function handleProjectDownloads(request, env, transport = fetch) {
   } catch {
     return new Response("Invalid URL", { status: 400 });
   }
-  const project = path.match(/^\/projects\/(automobile|mechanics|machine-elements|detali-mashyn|tea|engine|ice|cea)\/(.*)$/i);
+  const project = path.match(/^\/projects\/(automobile|mechanics|machine-elements|detali-mashyn|tea|engine|ice|cea|vehicle-sim)\/(.*)$/i);
   if (!project) return null;
   const relative = project[2];
   const document = /^(?:downloads|docs)(?:\/|$)/i.test(relative) || /\.pdf(?:\/|$)/i.test(relative) || /^(?:build|examples)(?:\/|$)/i.test(relative) && !/\.(?:json|csv)$/i.test(relative);

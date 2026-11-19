@@ -65,5 +65,14 @@
     "vehicle_triangles": 3296,
     "source_used_elsewhere_on_homepage": false,
     "authoring_script": "upload-batches/Home-v0.5.16/source-tools/build-obd-library-preview.mjs"
+  },
+  "vehicle-test-cell": {
+    "source": "My_vehicle_sim/src/scene.ts and data/vehicle.json",
+    "vehicle_model": "Tesla 2018 Model 3 by Ameer Studio",
+    "vehicle_model_url": "https://skfb.ly/oo9Y6",
+    "vehicle_model_license": "https://creativecommons.org/licenses/by/4.0/",
+    "adaptations": "Open room cutaway with simplified materials, opaque glass and exterior geometry",
+    "bytes": 8538736,
+    "sha256": "3a05ed74b5b537512d0246be7709a177c6b8b57f086637474f2160fea0ac9fc8"
   }
 }

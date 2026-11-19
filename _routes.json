@@ -10,7 +10,8 @@
     "/projects/tea/*",
     "/projects/engine/*",
     "/projects/ice/*",
-    "/projects/cea/*"
+    "/projects/cea/*",
+    "/projects/vehicle-sim/downloads/*"
   ],
   "exclude": []
 }

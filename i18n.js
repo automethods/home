@@ -154,9 +154,14 @@ const messages = {
     "obdAvailability": "Online lab",
     "modelObd": "Teaching vehicle and enlarged electronic control unit",
     "loadingObd": "Loading vehicle and ECU…",
-    "obdIntro": "Drive a virtual vehicle, inspect live sensor data, introduce faults and practise OBD diagnostics in your browser.",
+    "obdIntro": "Virtual vehicle. OBD diagnostics of sensor faults.",
     "obdDetail": "Choose petrol, diesel, hybrid or electric vehicles. Drive, inspect live values, inject connector faults and follow CAN / ISO-TP requests. Run the complete simulator directly in your browser.",
-    "obdOpen": "Open OBD II Lab"
+    "obdOpen": "Open OBD II Lab",
+    "vehicleSimAvailability": "Online lab",
+    "vehicleSimTitle": "Vehicle Testing on a Roller Dynamometer",
+    "modelVehicleSim": "3D test cell with a car and roller dynamometer",
+    "loadingVehicleSim": "Loading the test cell…",
+    "vehicleSimIntro": "A virtual lab for testing a Tesla Model 3. Run driving cycles and explore braking and charging."
   },
   "uk": {
     "projectOverview": "Про проєкт",
@@ -313,9 +318,14 @@ const messages = {
     "obdAvailability": "Онлайн-лабораторія",
     "modelObd": "Навчальний автомобіль і збільшений електронний блок керування",
     "loadingObd": "Завантаження автомобіля й ЕБК…",
-    "obdIntro": "Керуйте віртуальним автомобілем, переглядайте сигнали датчиків, створюйте несправності та практикуйте OBD-діагностику у браузері.",
+    "obdIntro": "Віртуальний автомобіль. OBD-діагностика несправностей датчиків.",
     "obdDetail": "Обирайте бензиновий, дизельний, гібридний або електричний автомобіль. Керуйте ним, переглядайте поточні дані, створюйте обриви з’єднань і простежуйте запити CAN / ISO-TP. Повний симулятор працює безпосередньо у браузері.",
-    "obdOpen": "Відкрити OBD II Lab"
+    "obdOpen": "Відкрити OBD II Lab",
+    "vehicleSimAvailability": "Онлайн-лабораторія",
+    "vehicleSimTitle": "Випробування автомобіля на роликовому стенді",
+    "modelVehicleSim": "Тривимірна випробувальна камера з автомобілем і роликовим стендом",
+    "loadingVehicleSim": "Завантаження випробувальної камери…",
+    "vehicleSimIntro": "Віртуальна лабораторія для випробувань Tesla Model 3. Виконуйте їздові цикли, досліджуйте гальмування та заряджання."
   }
 };
 let language = globalThis.AutoMethodsLanguage?.language || 'en';
