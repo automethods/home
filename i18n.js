@@ -161,7 +161,7 @@ const messages = {
     "vehicleSimTitle": "Vehicle Testing on a Roller Dynamometer",
     "modelVehicleSim": "3D test cell with a car and roller dynamometer",
     "loadingVehicleSim": "Loading the test cell…",
-    "vehicleSimIntro": "A virtual lab for testing a Tesla Model 3. Run driving cycles and explore braking and charging."
+    "vehicleSimIntro": "A virtual laboratory for vehicle testing on a roller dynamometer. Evaluate the powertrain and brakes over drive cycles."
   },
   "uk": {
     "projectOverview": "Про проєкт",
@@ -322,10 +322,10 @@ const messages = {
     "obdDetail": "Обирайте бензиновий, дизельний, гібридний або електричний автомобіль. Керуйте ним, переглядайте поточні дані, створюйте обриви з’єднань і простежуйте запити CAN / ISO-TP. Повний симулятор працює безпосередньо у браузері.",
     "obdOpen": "Відкрити OBD II Lab",
     "vehicleSimAvailability": "Онлайн-лабораторія",
-    "vehicleSimTitle": "Випробування автомобіля на роликовому стенді",
+    "vehicleSimTitle": "Випробування на стенді з біговими барабанами",
     "modelVehicleSim": "Тривимірна випробувальна камера з автомобілем і роликовим стендом",
     "loadingVehicleSim": "Завантаження випробувальної камери…",
-    "vehicleSimIntro": "Віртуальна лабораторія для випробувань Tesla Model 3. Виконуйте їздові цикли, досліджуйте гальмування та заряджання."
+    "vehicleSimIntro": "Віртуальна лабораторія для випробувань автомобіля на стенді з біговими барабанами. Перевірка енергетичної установки та гальм за їздовими циклами."
   }
 };
 let language = globalThis.AutoMethodsLanguage?.language || 'en';
