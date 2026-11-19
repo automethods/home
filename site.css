@@ -122,7 +122,10 @@ header { min-height: 80px; display: flex; align-items: center; justify-content: 
 .method-steps h3 { font-size: 17px; font-weight: 650; margin: 15px 0 10px; }
 .method-steps p { color: #a1b5bb; font-size: 13px; line-height: 1.7; margin: 0; max-width: 265px; }
 .organisations { padding: 12px 0 72px; }
-.organisation-group { max-width: 520px; margin-bottom: 12px; }
+#shared-organisations { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 12px; max-width: 900px; }
+@media (max-width: 720px) {
+  #shared-organisations { grid-template-columns: 1fr; max-width: 520px; }
+}
 .organisation-summary { cursor: pointer; list-style: none; }
 .organisation-summary::-webkit-details-marker { display: none; }
 .disclosure-chevron { margin-left: auto; color: #a6c8d0; font-size: 24px; line-height: 1; transition: transform .2s; }
@@ -132,6 +135,7 @@ header { min-height: 80px; display: flex; align-items: center; justify-content: 
 .department-grid { position: relative; display: grid; grid-template-columns: 1fr; gap: 8px; margin: 12px 0 0 20px; padding-left: 14px; border-left: 1px solid #3b5861; }
 .department-grid::before { content: ""; position: absolute; left: -1px; top: -12px; height: 12px; border-left: 1px solid #3b5861; }
 .organisation-tile { display: flex; align-items: center; gap: 12px; min-height: 72px; padding: 12px; background: #101f29; border: 1px solid var(--line); border-radius: 8px; }
+.organisation-tile.organisation-summary { min-height: 84px; }
 .organisation-tile:hover { border-color: #53847d; }
 .organisation-mark { display: flex; align-items: center; justify-content: center; flex: 0 0 40px; width: 40px; height: 40px; background: #fff; border-radius: 7px; padding: 4px; }
 .organisation-mark img { display: block; width: 100%; height: 100%; object-fit: contain; }
