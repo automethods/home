@@ -2543,7 +2543,7 @@
     ]
   },
   "vehicle-sim": {
-    "version": "0.1.0",
+    "version": "0.1.2",
     "repository": "automethods/vehicle-sim",
     "files": {
       "CALIBRATION.md": "02d0f19a8e7bea245263384985301c2475b5533a640c4c6267a8b993bd7ad055",
@@ -2560,7 +2560,7 @@
       "dist/cycle.js": "3fdcab561e00d2620b61b247b49b9263e065bb1ac342180fa55de5e3728b7712",
       "dist/diagnostics.js": "23d7a257bc73179e356b68726ada8eb80b9574915ba808bddcc246bc99fdfc7b",
       "dist/driver-display.js": "e2a746712705ec7d84c4c4f5d0f87945247836fe20dc215ca3131ea672500fcb",
-      "dist/i18n.js": "dd030697d05f07d460687a2c03e8cdabe82343081b50e2e6f07c0586dd1328cd",
+      "dist/i18n.js": "0414f09408ca4c5d0f463e2522cd017c34da09602abb2222c158d381cf79ee23",
       "dist/lab.js": "6926bc8abd4c45d2acd1fe1e089881028dd14c8c38c23b1ecd18ac092c805ee4",
       "dist/pdf-report.js": "64ac719283092ff7ad99f3f0f4ae9c22ae1d849f34a52f6bbfa18a8c842b252d",
       "dist/plant.js": "aca65b273d415137ac12eb5e838836998bc72add510e128f53e631b95e9f2415",
@@ -2583,7 +2583,7 @@
       "online/fonts/DejaVuSans-Bold.ttf": "5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895",
       "online/fonts/DejaVuSans.ttf": "ae7b7855e115a5966d8b1b3f80f254ccc117ec86f9965e202ee2940453837280",
       "online/fonts/LICENSE": "63d3ba759d12804c5b31a9d5940d855c1820d1f5999e6b0872eb1c7ff045fbc9",
-      "online/index.html": "9c71904a8db4cd53d1caee77180d56ddb31934dc5f4388ff5959b48723bc4c07",
+      "online/index.html": "091c22f1d21a71834f5051f060432b8671632426bccef3a3367056f25cb3a1b6",
       "online/python/PYODIDE-LICENSE": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
       "online/python/charset_normalizer-3.4.4-py3-none-any.whl": "a38bf5c0618356836cbd34e1126ca28248735caca46f3d5218b6463dc1ac34d8",
       "online/python/pillow-11.3.0-cp313-cp313-pyemscripten_2025_0_wasm32.whl": "57d88e2ac283c21830b4ee920cb73fbbf5c46df62d967089fce5fec46548bd7b",
@@ -2594,13 +2594,13 @@
       "online/python/python_stdlib.zip": "831fd1e535084b972f87c6a35275de3d236efd5166f5e77ce89497710635e73c",
       "online/python/reportlab-4.4.10-py3-none-any.whl": "5abc815746ae2bc44e7ff25db96814f921349ca814c992c7eac3c26029bf7c24",
       "online/worker.mjs": "d4def5ace8603b3dfff72535e6808710238598eb340a9696a4c7a8a92d66c8af",
-      "package-lock.json": "92ba9c57d11edc39e4b7dadedbf623cfc093fcc0651785fdf7591c70cad963b4",
-      "package.json": "94e1e675cecb6c941dee9b81963437692a579ab622397314d3f4198c7f181172",
+      "package-lock.json": "6d22d11d515e4f18aaef5461c090f02f011c5ea1cd4398a9245d72ca0d5b42e9",
+      "package.json": "97a876580f367ab7b76905063ca01ec278703681b6f980088508ab75b08d23e4",
       "plant/model3_ev.py": "71cbc822bc710ba1bb913067ad1de6ec14ade2fdd34485db6387dbfa950b38d3",
       "plant/tum_dyno.json": "86dfd33300c39cd86d5a0f49333a636be9beee964a7e02b11d6b9521b20775fb",
       "public/college.svg": "09453c1d1f9d9d9307831ba9518382d85cc1efe62d13c797807930e17ab75008",
       "public/department.png": "d9a933c9f7a338fbe56b947f23e0a72be0425e4f33afb2ab57faf6be666e9edf",
-      "public/index.html": "022fd3b1d731c4cbff0281cdbc86994a56960364640f8b7e1de8b1fe9a1e3f28",
+      "public/index.html": "8ed883a1ccf66ec502e8740e058158c63f141250b12d8d581c5bc253292e6602",
       "public/polissia.svg": "5715d524c013d20d075be8d53f318b460cdf7f1e5a8645fef6c5bae757685efc",
       "public/style.css": "cdf3caa9dffb9c0b66281d76a1048ee95974d8a1bb90cdc05ec284a924835d49",
       "public/vendor/three/LICENSE": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
@@ -2614,7 +2614,7 @@
       "scripts/compare-tum.mjs": "609f06d0caa301e21abe78f4e0f07b1ff9baa9d124efd8e6d07f87f0c88e4fc4",
       "scripts/import-cycles.py": "2f1ecd2934baaf47623b84db0498edaf0d680b9516bdc650fd31d29e2e6b7753",
       "scripts/import-tum-pack.py": "daeee07ceffffdcd2f92650698bf87a8b1e8072788a37878bc5735e0826fcaed",
-      "scripts/render-run-report.py": "347141dbaab0e9ec9b10897bc8aa1f9593ed9b81d11f5ca58a88b6605510b9b1",
+      "scripts/render-run-report.py": "45c1864537e22f5a6dc44dfe7fd2d20de02790c02b32f188d6aa482c4e03f8aa",
       "scripts/step-to-stl.cpp": "f5014df949dc724b5eaae3fc518d4967e47baa1fd6b54cbcbc16a45a962e43f9",
       "src/account.ts": "e200d4943999275772ccb1040e9a063b1e2d697decb7af4c557e29565f00aef6",
       "src/coc.ts": "4cadc17efada42865d26d1c4ff19b24fd0f947d2f9ac3508d54561de917e4630",
@@ -2622,7 +2622,7 @@
       "src/cycle.ts": "5e3e7074d2f03d2da75c62533befa50230441c8c4b80cabc0738bef4cb5c77f8",
       "src/diagnostics.ts": "b357639ecade32bbac82a0631812abebc929098c289f1d05a34a137a1d205ac6",
       "src/driver-display.ts": "bd4f81345b4d65db75f613b00cfb769cab15bbfe14ac5ca89b00d2c440e4f537",
-      "src/i18n.ts": "941e5743445e3f25ab8d3d1d2bc3a5e054f5d3590b0271966819e99ac45c467e",
+      "src/i18n.ts": "8d6298230423e68728dc5c0a9c40f899e8bf7612fedf4cedcaf3791fb5006b61",
       "src/lab.ts": "7309c252e68df9778f61c8818480160760c51e4d98901db1ba1ffad6eab317fc",
       "src/pdf-report.ts": "164f2ea2e889811f6f41c77d48d94e0785103ac68847f217f0c208c96737502d",
       "src/plant.ts": "f380235aad8386e2ff28bba73d247d0372daed03d81c354e81e69460a6dca7d9",
@@ -2691,6 +2691,6 @@
       "vendor/three/utils/BufferGeometryUtils.js": "public/vendor/three/utils/BufferGeometryUtils.js",
       "vendor/three/utils/SkeletonUtils.js": "public/vendor/three/utils/SkeletonUtils.js"
     },
-    "commit": "fc1d6e52ed5df77f790c4452ad375c7c0fc081d9"
+    "commit": "08bf665130ebc40920d10979f5250bbee6eba940"
   }
 }
