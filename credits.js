@@ -1,4 +1,4 @@
-import './i18n.js?v=0.5.19';
+import './i18n.js?v=0.5.23';
 import views from './assets/credits/views.js?v=0.5.22';
 
 function render() {

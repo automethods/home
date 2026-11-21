@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { t } from './i18n.js?v=0.5.19';
+import { t } from './i18n.js?v=0.5.23';
 import { addBusLights } from './bus-lights.js';
 
 const loader = new GLTFLoader();
@@ -23,6 +23,25 @@ function normalize(root, length) {
   root.position.sub(new THREE.Vector3(center.x, bounds.min.y, center.z));
   group.scale.setScalar(length / Math.max(size.x, size.y, size.z));
   return group;
+}
+
+async function serviceBay(viewport) {
+  const project = viewport.closest('.card').querySelector('.action').href;
+  const { MeshoptDecoder } = await import(new URL('vendor/three/libs/meshopt_decoder.module.js', project));
+  const workshopLoader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+  const load = (file, revision = '') => workshopLoader.loadAsync(new URL(`models/${file}.glb${revision}`, project).href);
+  const [car, lift, changer] = await Promise.all([
+    load('tesla-lift'), load('lift-ukrainian', '?v=native-controls'), load('tyre-changer'),
+  ]);
+  const bay = new THREE.Group();
+  const vehicle = normalize(car.scene, 4.69);
+  lift.scene.rotation.y = Math.PI / 2;
+  lift.scene.position.x = -0.65;
+  vehicle.position.x = -0.65;
+  const tyreChanger = normalize(changer.scene, 1.9);
+  tyreChanger.position.set(2.55, 0, 1.25);
+  bay.add(vehicle, lift.scene, tyreChanger);
+  return normalize(bay, 4);
 }
 
 async function createView(viewport) {
@@ -80,7 +99,7 @@ async function createView(viewport) {
     const radius = bounds.getBoundingSphere(new THREE.Sphere()).radius;
     const vertical = THREE.MathUtils.degToRad(camera.fov / 2);
     const angle = Math.min(vertical, Math.atan(Math.tan(vertical) * camera.aspect));
-    const framing = { obd: 0.95, vehicleSim: 1.06 };
+    const framing = { obd: 0.95, vehicleSim: 1.06, serviceEquipment: 0.92 };
     const distance = radius / Math.sin(angle) * (framing[key] ?? 0.78);
     controls.target.copy(center);
     const direction = key === 'vehicleSim' ? new THREE.Vector3(1.1, 1.03, -1.4)
@@ -150,6 +169,8 @@ async function createView(viewport) {
       model.add(vehicle);
     });
     viewport.dataset.vehicleCount = String(vehicles.length);
+  } else if (key === 'serviceEquipment') {
+    model = await serviceBay(viewport);
   } else {
     const files = { vehicle: 'sports-car-rich', powertrain: 'chassis', gearbox: 'gearbox', commercial: 'commercial-fleet',
       obd: 'obd-diagnostics', vehicleSim: 'vehicle-test-cell' };
@@ -197,15 +218,15 @@ function mountView(viewport) {
   });
 }
 
-const testCell = document.querySelector('.card-model[data-scene="vehicleSim"]');
+const lazyScenes = new Set(['vehicleSim', 'serviceEquipment']);
+const nearViewport = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    if (!entry.isIntersecting) continue;
+    nearViewport.unobserve(entry.target);
+    mountView(entry.target);
+  }
+}, { rootMargin: '160px' });
 for (const viewport of document.querySelectorAll('.card-model')) {
-  if (viewport !== testCell) mountView(viewport);
-}
-if (testCell) {
-  const nearViewport = new IntersectionObserver(([entry]) => {
-    if (!entry.isIntersecting) return;
-    nearViewport.disconnect();
-    mountView(testCell);
-  }, { rootMargin: '160px' });
-  nearViewport.observe(testCell);
+  if (lazyScenes.has(viewport.dataset.scene)) nearViewport.observe(viewport);
+  else mountView(viewport);
 }
